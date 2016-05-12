@@ -39,7 +39,7 @@
                 <a href="{{ route('preachers.index')}} "><i class="fa fa-fw fa-bullhorn"></i> Predicadores</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                <a href="{{ route('sermons.index') }}"><i class="fa fa-fw fa-play"></i> Predicas</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>

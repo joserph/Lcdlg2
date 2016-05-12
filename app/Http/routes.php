@@ -64,3 +64,5 @@ Route::get('date', 'DatesController@getList');
 // Preachers
 Route::resource('preachers', 'PreachersController');
 Route::get('preacher', 'PreachersController@getList');
+// Sermons
+Route::resource('sermons', 'SermonsController');
