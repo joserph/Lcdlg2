@@ -12,6 +12,12 @@ use App\Preacher;
 
 class SermonsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('editor');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -120,6 +126,10 @@ class SermonsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sermon = Sermon::find($id);
+        $sermon->delete();
+
+        flash()->error('La prédica <b>' . $sermon->title . '</b> se eliminó con exito!');
+        return redirect()->route('sermons.index');
     }
 }

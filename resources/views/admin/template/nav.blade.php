@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Panel de Administración</a>
+        <a class="navbar-brand" href="{{ route('admin.index') }}">Panel de Administración</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -30,6 +30,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active">
+                <a href="/"><i class="fa fa-fw fa-users"></i> Font</a>
+            </li>
+            <li>
                 <a href="{{ route('users.index') }}"><i class="fa fa-fw fa-users"></i> Admin users</a>
             </li>
             <li>

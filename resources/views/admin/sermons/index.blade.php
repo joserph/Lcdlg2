@@ -1,19 +1,18 @@
-@extends('admin.template.layout');
+@extends('admin.template.layout')
 
-@section('title') Predicas | Panel de administración @endsection
+@section('title') Prédicas | Panel de administración @endsection
 
 @section('content')
 	<!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-                <i class="fa fa-play fa-fw"></i> Predicas 
+                <i class="fa fa-play fa-fw"></i> Prédicas 
                 <a href="{{ route('sermons.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i> Agregar</a>
             </h2>
             <ol class="breadcrumb">
-                <li class="active">
-                    <i class="fa fa-bars fa-fw"></i> Lista de predicas
-                </li>
+                <li><i class="fa fa-bars fa-fw"></i> <a href="{{ route('admin.index') }}">Panel de administración</a></li>
+                <li class="active">Lista de prédicas</li>
             </ol>
         </div>
     </div>

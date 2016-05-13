@@ -1,16 +1,16 @@
 @extends('admin.template.layout')
 
+@section('title') Editar usuario | Panel de Administración @stop
+
 @section('content')
  	<!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">
-                Panel de Administración <small>Usuarios registrados</small>
-            </h1>
+            <h2 class="page-header"><i class="fa fa-edit fa-fw"></i> Editar usuario</h2>
             <ol class="breadcrumb">
-                <li class="active">
-                    <i class="fa fa-edit"></i> Editar usuario
-                </li>
+                <li><i class="fa fa-bars"></i> <a href="{{ route('admin.index') }}">Panel de administración</a></li>
+                <li><a href="{{ route('users.index') }}">Usuarios</a></li>
+                <li class="active">Editar usuario</li>
             </ol>
         </div>
     </div>
@@ -51,7 +51,7 @@
 								'admin' => 'Admin'], $user->role,['class' => 'form-control', 'autofocus']) !!}							
 						</div>
 						
-						{!! Form::submit('Editar', ['class' => 'btn btn-warning']) !!}
+						<button tipe="submit" class="btn btn-warning"><i class="fa fa-refresh"></i> Actualizar</button>
 					{!! Form::close() !!}
 					
 				</div>

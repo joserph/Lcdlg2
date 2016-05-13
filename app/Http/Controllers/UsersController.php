@@ -91,8 +91,8 @@ class UsersController extends Controller
         //dd($user);
         $user->save();
 
-        flash()->success('<i class="fa fa-check fa-fw"></i> El usuario <b>' . $user->name . '</b> se actualizo correctamente!');
-        return redirect()->route('admin.index');
+        flash()->warning('<i class="fa fa-check fa-fw"></i> El usuario <b>' . $user->name . '</b> se actualizo correctamente!');
+        return redirect()->route('users.index');
     }
 
     /**

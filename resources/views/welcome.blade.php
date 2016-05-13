@@ -8,5 +8,5 @@
             <p>Welcome to Auth system by <strong><a href="http://twitter.com/joserph_a" target="_blanck">@joserph_a</a></strong></p>            
         </div>
     </div>
-
+	
 @endsection

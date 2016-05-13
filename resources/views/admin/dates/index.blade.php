@@ -11,9 +11,8 @@
                 <button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle fa-fw"></i> Agregar</button>
             </h2>
             <ol class="breadcrumb">
-                <li class="active">
-                    <i class="fa fa-bars fa-fw"></i> Lista de fechas
-                </li>
+                <li><i class="fa fa-bars fa-fw"></i> <a href="{{ route('admin.index') }}">Panel de administración</a></li>
+                <li class="active">Lista de fechas</li>
             </ol>
         </div>
     </div>
