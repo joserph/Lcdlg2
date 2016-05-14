@@ -4,10 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>@yield('title', 'Auth System')</title>
+	<title>@yield('title', 'Iglesia La Comunidad de la Gracia | Bendecidos para Bendecir')</title>
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flatly-bootstrap.css') }}">
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -20,7 +21,8 @@
 <body>
 	<div id="wrapper">
 		<div class="container">
-			@include('template.nav')
+			@include('template.partials.header')
+			<!--@include('template.nav')-->
 			
 			@yield('content')
 		</div>		

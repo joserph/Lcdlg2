@@ -6,18 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Date;
-use App\Preacher;
-use App\Sermon;
 
-class AdminController extends Controller
+class FrontController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('editor');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -25,18 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $countUsers = User::count();
-        $countDates = Date::count();
-        $countPreachers = Preacher::count();
-        $countSermons = Sermon::where('tipo', '=', 'predica')->count();
-        $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
-        //dd($countUsers);
-        return view('admin.index')
-            ->with('countUsers', $countUsers)
-            ->with('countDates', $countDates)
-            ->with('countPreachers', $countPreachers)
-            ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles);
+        return view('front.index');
     }
 
     /**

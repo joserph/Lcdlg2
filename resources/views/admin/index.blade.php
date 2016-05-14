@@ -54,9 +54,9 @@
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ $countDates }}</div>
                             @if($countDates > 1)
-                                <div>Fechas Agregadas!</div>
+                                <div>Fechas!</div>
                             @else
-                                <div>Fecha Agregada!</div>
+                                <div>Fecha!</div>
                             @endif
                         </div>
                     </div>
@@ -80,9 +80,9 @@
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ $countPreachers }}</div>
                             @if($countPreachers > 1)
-                                <div>Predicadores Agregados!</div>
+                                <div>Predicadores!</div>
                             @else
-                                <div>Predicador Agregado!</div>
+                                <div>Predicador!</div>
                             @endif
                         </div>
                     </div>
@@ -106,16 +106,42 @@
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ $countSermons }}</div>
                             @if($countSermons > 1)
-                                <div>Predicas Agregadas!</div>
+                                <div>Predicas!</div>
                             @else
-                                <div>Predica Agregada!</div>
+                                <div>Predica!</div>
                             @endif
                         </div>
                     </div>
                 </div>
                 <a href="{{ route('sermons.index') }}">
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">Ver Detalles</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-file-text fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ $countArticles }}</div>
+                            @if($countArticles > 1)
+                                <div>Artícilos!</div>
+                            @else
+                                <div>Artícilo!</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('articles.index') }}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Detalles</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>

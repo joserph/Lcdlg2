@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Date;
 use App\Sermon;
 use App\Preacher;
+use App\Http\Requests\SermonRequest;
 
 class SermonsController extends Controller
 {
@@ -25,7 +26,7 @@ class SermonsController extends Controller
      */
     public function index()
     {
-        $sermons = Sermon::with('month', 'year', 'preacher', 'user')->orderBy('id', 'DESC')->get();
+        $sermons = Sermon::with('month', 'year', 'preacher', 'user')->where('tipo', '=', 'predica')->orderBy('id', 'DESC')->get();
         $sermons->each(function($sermons)
         {
             $sermons->month;
@@ -61,7 +62,7 @@ class SermonsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SermonRequest $request)
     {
         $sermon = new Sermon($request->all());
         $sermon->save();

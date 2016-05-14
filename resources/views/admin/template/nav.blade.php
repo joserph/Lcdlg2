@@ -30,7 +30,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="/"><i class="fa fa-fw fa-users"></i> Font</a>
+                <a href="/"><i class="fa fa-fw fa-eye"></i> Página principal</a>
             </li>
             <li>
                 <a href="{{ route('users.index') }}"><i class="fa fa-fw fa-users"></i> Admin users</a>
@@ -45,7 +45,7 @@
                 <a href="{{ route('sermons.index') }}"><i class="fa fa-fw fa-play"></i> Predicas</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                <a href="{{ route('articles.index') }}"><i class="fa fa-fw fa-file-text"></i> Artículos</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>

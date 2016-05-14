@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+	'as' => 'front.index',
+	'uses' => 'FrontController@index'
+]);
+
 
 // Authentication routes...
 Route::get('logout', 'Auth\AuthController@getLogout');
@@ -66,3 +68,5 @@ Route::resource('preachers', 'PreachersController');
 Route::get('preacher', 'PreachersController@getList');
 // Sermons
 Route::resource('sermons', 'SermonsController');
+// Articles
+Route::resource('articles', 'ArticlesController');

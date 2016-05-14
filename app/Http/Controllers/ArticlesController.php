@@ -6,18 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Date;
-use App\Preacher;
-use App\Sermon;
+use App\Article;
+use App\Http\Requests\ArticleRequest;
 
-class AdminController extends Controller
+class ArticlesController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('editor');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,18 +24,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $countUsers = User::count();
-        $countDates = Date::count();
-        $countPreachers = Preacher::count();
-        $countSermons = Sermon::where('tipo', '=', 'predica')->count();
-        $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
-        //dd($countUsers);
-        return view('admin.index')
-            ->with('countUsers', $countUsers)
-            ->with('countDates', $countDates)
-            ->with('countPreachers', $countPreachers)
-            ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles);
+        $articles = Article::with('user')->where('tipo', '=', 'articulo')->orderBy('id', 'DESC')->get();
+        $articles->each(function($articles)
+        {
+            $articles->user;
+        });
+        //dd($articles);
+        return view('admin.articles.index')
+            ->with('articles', $articles);
     }
 
     /**
@@ -46,7 +41,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.articles.create');
     }
 
     /**
@@ -55,9 +50,13 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        $article = new Article($request->all());
+        $article->save();
+
+        flash()->success('El artículo <b>' . $article->title . '</b> se agregó con exito!');
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -79,7 +78,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        return view('admin.articles.edit')
+            ->with('article', $article);
     }
 
     /**
@@ -91,7 +92,12 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::find($id);
+        $article->fill($request->all());
+        $article->save();
+
+        flash()->warning('El artículo <b>' . $article->title . '</b> se actualizó con exito!');
+        return redirect()->route('articles.index'); 
     }
 
     /**
@@ -102,6 +108,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $article = Article::find($id);
+         $article->delete();
+
+         flash()->error('El artículo <b>' . $article->title . '</b> se eliminó con exito!');
+         return redirect()->route('articles.index');
     }
 }
