@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class FrontController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-         $items = [
+        $items = [
             'home'          => [],
             'about'         => [],
             'contact-us'    => [],
@@ -27,7 +27,7 @@ class FrontController extends Controller
                                     ]
                                 ]
         ];
-        return view('front.index', compact('items'));
+        return view('template.partials.menu', compact($items));
     }
 
     /**

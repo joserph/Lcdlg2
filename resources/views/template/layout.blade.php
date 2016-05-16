@@ -22,7 +22,7 @@
 	<div id="wrapper">
 		<div class="container">
 			@include('template.partials.header')
-			<!--@include('template.nav')-->
+			@include('template.partials.menu')
 			
 			@yield('content')
 		</div>		

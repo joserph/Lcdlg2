@@ -150,6 +150,7 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Styde\Html\HtmlServiceProvider::class,
     ],
 
     /*
