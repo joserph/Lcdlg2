@@ -46,4 +46,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Article', 'id_user');
     }
+
+    public function menus()
+    {
+        return $this->hasMany('App\Menu', 'id_user');
+    }
 }

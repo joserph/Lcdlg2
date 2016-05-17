@@ -3,7 +3,7 @@
 @section('title') Predicadores | Panel de administración @endsection
 
 @section('content')
-<!-- Page Heading -->
+    <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">

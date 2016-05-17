@@ -70,3 +70,5 @@ Route::get('preacher', 'PreachersController@getList');
 Route::resource('sermons', 'SermonsController');
 // Articles
 Route::resource('articles', 'ArticlesController');
+// Menú
+Route::resource('menu', 'MenuController');

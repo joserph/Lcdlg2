@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Menu;
 class MenuController extends Controller
 {
     /**
@@ -16,18 +16,14 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $items = [
-            'home'          => [],
-            'about'         => [],
-            'contact-us'    => [],
-            'login'         => [],
-            'register'      => [ 'submenu' => [
-                                    'about'     => [],
-                                    'company'   => []
-                                    ]
-                                ]
-        ];
-        return view('template.partials.menu', compact($items));
+        $menus = Menu::with('user')->orderBy('id', 'DESC')->get();
+        $menus->each(function($menus)
+        {
+            $menus->user;
+        });
+        //dd($menus);
+        return view('admin.menu.index')
+            ->with('menus', $menus);
     }
 
     /**
@@ -37,7 +33,10 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $tipos =  ['normal' => 'Normal', 'expandido' => 'Expandido'];
+        $categorias = ['articulo' => 'Artículo', 'fecha' => 'Fecha'];
+
+        return view('admin.menu.create', compact('tipos', 'categorias'));
     }
 
     /**
@@ -48,7 +47,11 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $menu = new Menu($request->all());
+        $menu->save();
+
+        flash()->success('El menú <b>' . $menu->nombre . '</b> se agregó con exito!');
+        return redirect()->route('menu.index');
     }
 
     /**
