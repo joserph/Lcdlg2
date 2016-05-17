@@ -7,8 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Menu;
+use App\Http\Requests\MenuRequest;
+
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('editor');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,8 +43,10 @@ class MenuController extends Controller
     {
         $tipos =  ['normal' => 'Normal', 'expandido' => 'Expandido'];
         $categorias = ['articulo' => 'Artículo', 'fecha' => 'Fecha'];
+        $padres = Menu::where('estatus', '=', 'principal')->orderBy('id', 'DESC')->lists('nombre', 'id');
 
-        return view('admin.menu.create', compact('tipos', 'categorias'));
+        return view('admin.menu.create', compact('tipos', 'categorias'))
+            ->with('padres', $padres);
     }
 
     /**
@@ -45,7 +55,7 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
         $menu = new Menu($request->all());
         $menu->save();
@@ -73,7 +83,11 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = Menu::find($id);
+        $tipos =  ['normal' => 'Normal', 'expandido' => 'Expandido'];
+        $categorias = ['articulo' => 'Artículo', 'fecha' => 'Fecha'];
+        return view('admin.menu.edit', compact('tipos', 'categorias'))
+            ->with('menu', $menu);
     }
 
     /**
@@ -85,7 +99,12 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $menu = Menu::find($id);
+        $menu->fill($request->all());
+        $menu->save();
+
+        flash()->warning('El menú <b>' . $menu->nombre . '</b> se actualizó con exito!');
+        return redirect()->route('menu.index');
     }
 
     /**
@@ -96,6 +115,10 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::find($id);
+        $menu->delete();
+
+        flash()->error('El menú <b>' . $menu->nombre . '</b> de eliminó con exito!');
+        return redirect()->route('menu.index');
     }
 }

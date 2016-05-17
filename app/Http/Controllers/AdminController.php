@@ -10,6 +10,7 @@ use App\User;
 use App\Date;
 use App\Preacher;
 use App\Sermon;
+use App\Menu;
 
 class AdminController extends Controller
 {
@@ -30,13 +31,15 @@ class AdminController extends Controller
         $countPreachers = Preacher::count();
         $countSermons = Sermon::where('tipo', '=', 'predica')->count();
         $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
+        $countMenu = Menu::count();
         //dd($countUsers);
         return view('admin.index')
             ->with('countUsers', $countUsers)
             ->with('countDates', $countDates)
             ->with('countPreachers', $countPreachers)
             ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles);
+            ->with('countArticles', $countArticles)
+            ->with('countMenu', $countMenu);
     }
 
     /**

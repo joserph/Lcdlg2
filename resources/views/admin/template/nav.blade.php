@@ -48,7 +48,7 @@
                 <a href="{{ route('articles.index') }}"><i class="fa fa-fw fa-file-text"></i> Artículos</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                <a href="{{ route('menu.index') }}"><i class="fa fa-fw fa-bars"></i> Menú</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
