@@ -29,9 +29,13 @@ class MenuController extends Controller
         {
             $menus->user;
         });
+        $previewMenu = Menu::orderBy('peso', 'ASC')->get();
+        $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();
         //dd($menus);
         return view('admin.menu.index')
-            ->with('menus', $menus);
+            ->with('menus', $menus)
+            ->with('previewMenu', $previewMenu)
+            ->with('hijos', $hijos);
     }
 
     /**
@@ -43,7 +47,7 @@ class MenuController extends Controller
     {
         $tipos =  ['normal' => 'Normal', 'expandido' => 'Expandido'];
         $categorias = ['articulo' => 'Artículo', 'fecha' => 'Fecha'];
-        $padres = Menu::where('estatus', '=', 'principal')->orderBy('id', 'DESC')->lists('nombre', 'id');
+        $padres = Menu::where('tipo', '=', 'expandido')->orderBy('id', 'DESC')->lists('nombre', 'id');
 
         return view('admin.menu.create', compact('tipos', 'categorias'))
             ->with('padres', $padres);
@@ -86,8 +90,11 @@ class MenuController extends Controller
         $menu = Menu::find($id);
         $tipos =  ['normal' => 'Normal', 'expandido' => 'Expandido'];
         $categorias = ['articulo' => 'Artículo', 'fecha' => 'Fecha'];
+        $padres = Menu::where('tipo', '=', 'expandido')->orderBy('id', 'DESC')->lists('nombre', 'id');
+
         return view('admin.menu.edit', compact('tipos', 'categorias'))
-            ->with('menu', $menu);
+            ->with('menu', $menu)
+            ->with('padres', $padres);
     }
 
     /**

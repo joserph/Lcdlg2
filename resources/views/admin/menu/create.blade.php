@@ -78,6 +78,12 @@
                 </div>
             </div>
             <!-- Seleccionar Padre -->
+            {!! Form::label('id_padre', 'Padre') !!}
+            <div class="row">
+                <div class="col-md-5">
+                    {!! Form::select('id_padre', $padres, null, ['class' => 'form-control select-mes', 'placeholder' => 'Seleccione menú padre']) !!}
+                </div>
+            </div>
              {!! Form::label('categoria', 'Categoría') !!}
             <div class="row">
                 <div class="col-md-3">

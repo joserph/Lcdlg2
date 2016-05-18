@@ -106,9 +106,9 @@
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ $countSermons }}</div>
                             @if($countSermons > 1)
-                                <div>Predicas!</div>
+                                <div>Prédicas!</div>
                             @else
-                                <div>Predica!</div>
+                                <div>Prédica!</div>
                             @endif
                         </div>
                     </div>
