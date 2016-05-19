@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Menu;
 
 class FrontController extends Controller
 {
@@ -16,18 +17,11 @@ class FrontController extends Controller
      */
     public function index()
     {
-         $items = [
-            'home'          => [],
-            'about'         => [],
-            'contact-us'    => [],
-            'login'         => [],
-            'register'      => [ 'submenu' => [
-                                    'about'     => [],
-                                    'company'   => []
-                                    ]
-                                ]
-        ];
-        return view('front.index', compact('items'));
+        $previewMenu = Menu::orderBy('peso', 'ASC')->get();
+        $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();
+        return view('front.index')
+            ->with('previewMenu', $previewMenu)
+            ->with('hijos', $hijos);
     }
 
     /**

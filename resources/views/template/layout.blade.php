@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/flatly-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/paper-bootstrap.min.css') }}">
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -22,6 +22,7 @@
 	<div id="wrapper">
 		<div class="container">
 			@include('template.partials.header')
+			<hr>
 			@include('template.partials.menu')
 			
 			@yield('content')
