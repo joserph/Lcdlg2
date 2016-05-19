@@ -51,6 +51,9 @@
                 <a href="{{ route('menu.index') }}"><i class="fa fa-fw fa-bars"></i> Menú</a>
             </li>
             <li>
+                <a href="{{ route('ads.index') }}"><i class="fa fa-fw fa-bell"></i> Anuncios</a>
+            </li>
+            <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li>

@@ -72,3 +72,5 @@ Route::resource('sermons', 'SermonsController');
 Route::resource('articles', 'ArticlesController');
 // Menú
 Route::resource('menu', 'MenuController');
+// Ads
+Route::resource('ads', 'AdsController');

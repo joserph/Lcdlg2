@@ -6,20 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Date;
-use App\Preacher;
-use App\Sermon;
-use App\Menu;
+use App\Http\Requests\AdsRequest;
 use App\Ad;
 
-class AdminController extends Controller
+class AdsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('editor');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,22 +18,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $countUsers = User::count();
-        $countDates = Date::count();
-        $countPreachers = Preacher::count();
-        $countSermons = Sermon::where('tipo', '=', 'predica')->count();
-        $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
-        $countMenu = Menu::count();
-        $countAnuncios = Ad::count();
-        //dd($countUsers);
-        return view('admin.index')
-            ->with('countUsers', $countUsers)
-            ->with('countDates', $countDates)
-            ->with('countPreachers', $countPreachers)
-            ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles)
-            ->with('countMenu', $countMenu)
-            ->with('countAnuncios', $countAnuncios);
+        $ads = Ad::with('user')->orderBy('id', 'DESC')->get();
+        $ads->each(function($ads)
+        {
+            $ads->user;
+        });
+        //dd($ads);
+        return view('admin.ads.index')
+            ->with('ads', $ads);
     }
 
     /**
@@ -52,7 +35,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.ads.create');
     }
 
     /**
@@ -61,9 +44,13 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdsRequest $request)
     {
-        //
+        $ad = new Ad($request->all());
+        $ad->save();
+
+        flash()->success('El anuncio <b>' . $ad->nombre . '</b> se agregó con exito!');
+        return redirect()->route('ads.index');
     }
 
     /**
@@ -85,7 +72,10 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ad = Ad::find($id);
+
+        return view('admin.ads.edit')
+            ->with('ad', $ad);
     }
 
     /**
@@ -97,7 +87,12 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ad = Ad::find($id);
+        $ad->fill($request->all());
+        $ad->save();
+
+        flash()->warning('El anuncio <b>' . $ad->nombre . '</b> se actualizó con exito!');
+        return redirect()->route('ads.index');
     }
 
     /**
@@ -108,6 +103,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ad = Ad::find($id);
+        $ad->delete();
+
+        flash()->error('El anuncio <b>' . $ad->nombre . '</b> se eliminó con exito!');
+        return redirect()->route('ads.index');
     }
 }

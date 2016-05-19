@@ -31,11 +31,13 @@ class MenuController extends Controller
         });
         $previewMenu = Menu::orderBy('peso', 'ASC')->get();
         $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();
+        $padres = Menu::where('tipo', '=', 'expandido')->orderBy('id', 'DESC')->get();//para use de la tabla
         //dd($menus);
         return view('admin.menu.index')
             ->with('menus', $menus)
             ->with('previewMenu', $previewMenu)
-            ->with('hijos', $hijos);
+            ->with('hijos', $hijos)
+            ->with('padres', $padres);
     }
 
     /**

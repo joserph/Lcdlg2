@@ -93,10 +93,24 @@
             @foreach($menus as $item) 
             <tr>
                 <td class="text-center">{{ $item->nombre }} </td>
-                <td class="text-center">{{ $item->estatus }}</td>
+                @if($item->estatus == 'principal')
+                    <td class="text-center"><span class="label label-success">{{ $item->estatus }}</span></td>
+                @elseif($item->estatus == 'publico')
+                    <td class="text-center"><span class="label label-info">{{ $item->estatus }}</span></td>
+                @elseif($item->estatus == 'privado')
+                    <td class="text-center"><span class="label label-warning">{{ $item->estatus }}</span></td>
+                @else
+                    <td class="text-center"><span class="label label-danger">{{ $item->estatus }}</span></td>
+                @endif
                 <td class="text-center">{{ $item->peso}}</td>
                 <td class="text-center">{{ $item->tipo }} </td>
-                <td class="text-center">{{ $item->id_padre }}</td>
+                @foreach($padres as $padre)
+                    @if($padre->id == $item->id_padre)
+                        <td class="text-center">{{ $padre->nombre }}</td>
+                    @elseif($item->id_padre == 0)
+                        <td class="text-center"><em>Null</em></td>
+                    @endif
+                @endforeach
                 <td class="text-center">{{ $item->categoria }}</td>
                 <td class="text-center">{{ $item->user->name }} </td>
                 <td class="text-center">
