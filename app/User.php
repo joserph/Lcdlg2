@@ -56,4 +56,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Ad', 'id_user');
     }
+
+    public function verses()
+    {
+        return $this->hasMany('App\Verse', 'id_user');
+    }
 }

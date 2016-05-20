@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Menu;
+use App\Ad;
 
 class FrontController extends Controller
 {
@@ -17,11 +18,16 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $previewMenu = Menu::orderBy('peso', 'ASC')->get();
-        $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();
+        $previewMenu = Menu::orderBy('peso', 'ASC')->get();//Menú
+        $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();//Menú
+        $anuncios = Ad::where('estatus', '=', 'publico')->get();
+        $contador = 0;
+
         return view('front.index')
             ->with('previewMenu', $previewMenu)
-            ->with('hijos', $hijos);
+            ->with('hijos', $hijos)
+            ->with('anuncios', $anuncios)
+            ->with('contador', $contador);
     }
 
     /**

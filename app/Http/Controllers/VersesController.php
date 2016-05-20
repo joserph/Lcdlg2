@@ -6,21 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Date;
-use App\Preacher;
-use App\Sermon;
-use App\Menu;
-use App\Ad;
 use App\Verse;
 
-class AdminController extends Controller
+class VersesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('editor');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -28,24 +17,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $countUsers = User::count();
-        $countDates = Date::count();
-        $countPreachers = Preacher::count();
-        $countSermons = Sermon::where('tipo', '=', 'predica')->count();
-        $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
-        $countMenu = Menu::count();
-        $countAds = Ad::count();
-        $countVerses = Verse::count();
-        //dd($countUsers);
-        return view('admin.index')
-            ->with('countUsers', $countUsers)
-            ->with('countDates', $countDates)
-            ->with('countPreachers', $countPreachers)
-            ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles)
-            ->with('countMenu', $countMenu)
-            ->with('countAds', $countAds)
-            ->with('countVerses', $countVerses);
+        $verses = Verse::orderBy('id', 'DESC')->get();
+        $verses->each(function($verses)
+        {
+            $verses->user;
+        });
+        //dd($verses);
+        return view('admin.verses.index')
+            ->with('verses', $verses);
     }
 
     /**
@@ -55,7 +34,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.verses.create');
     }
 
     /**
@@ -66,7 +45,11 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $verse = new Verse($request->all());
+        $verse->save();
+
+        flash()->success('El versículo <b>' . $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo . '</b> se agregó con exito!');
+        return redirect()->route('verses.index');
     }
 
     /**
@@ -88,7 +71,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $verse = Verse::find($id);
+        return view('admin.verses.edit')
+            ->with('verse', $verse);
     }
 
     /**
@@ -100,7 +85,12 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $verse = Verse::find($id);
+        $verse->fill($request->all());
+        $verse->save();
+
+        flash()->warning('El versículo <b>' . $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo . '</b> se actualizó con exito!');
+        return redirect()->route('verses.index');
     }
 
     /**
@@ -111,6 +101,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $verse = Verse::find($id);
+        $verse->delete();
+
+        flash()->error('El versículo <b>' . $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo . '</b> se eliminó con exito!');
+        return redirect()->route('verses.index');
     }
 }
