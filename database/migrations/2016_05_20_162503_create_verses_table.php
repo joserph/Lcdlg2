@@ -19,6 +19,7 @@ class CreateVersesTable extends Migration
             $table->integer('capitulo');
             $table->integer('versiculo');
             $table->string('texto');
+            $table->string('verso');
             $table->integer('id_user')->unsigned();
             $table->integer('update_user');
             $table->foreign('id_user')->references('id')->on('users');            

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Verse;
+use App\Http\Requests\VerseRequest;
+use Validator;
 
 class VersesController extends Controller
 {
@@ -43,13 +45,14 @@ class VersesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VerseRequest $request)
     {
         $verse = new Verse($request->all());
+        $verse->verso = $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo;
         $verse->save();
 
         flash()->success('El versículo <b>' . $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo . '</b> se agregó con exito!');
-        return redirect()->route('verses.index');
+        return redirect()->route('verses.index');        
     }
 
     /**
@@ -87,6 +90,7 @@ class VersesController extends Controller
     {
         $verse = Verse::find($id);
         $verse->fill($request->all());
+        $verse->verso = $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo;
         $verse->save();
 
         flash()->warning('El versículo <b>' . $verse->libro . ' ' . $verse->capitulo . ':' . $verse->versiculo . '</b> se actualizó con exito!');

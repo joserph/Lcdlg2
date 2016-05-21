@@ -12,7 +12,8 @@ class Verse extends Model
     	'libro', 
     	'capitulo', 
     	'versiculo', 
-    	'texto', 
+    	'texto',
+        'verso',
     	'update_user',
     	'id_user'];
 

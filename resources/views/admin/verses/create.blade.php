@@ -8,7 +8,9 @@
     <!-- Plugin trumbowyg -->
     <link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">
 @endsection
-
+<script>
+    
+</script>
 @section('content')
 	<!-- Page Heading -->
     <div class="row">
