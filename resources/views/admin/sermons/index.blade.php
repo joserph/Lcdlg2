@@ -36,6 +36,7 @@
                 <td class="text-center">{{ $item->preacher->nombre }}</td>
                 <td class="text-center">{{ $item->user->name }}</td>
                 <td class="text-center">
+                    <a href="{{ URL::route('show-sermon', $item->slug) }}" class="btn btn-info btn-xs"><i class="fa fa-eye fa-fw"></i> Ver</a>
                     <a href="{{ route('sermons.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</a>
                 </td>
             </tr>          

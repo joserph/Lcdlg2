@@ -12,8 +12,8 @@
 */
 
 Route::get('/', [
-	'as' => 'front.index',
-	'uses' => 'FrontController@index'
+	'as' 	=> 'front.index',
+	'uses' 	=> 'FrontController@index'
 ]);
 
 
@@ -22,28 +22,28 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
 Route::get('register', [
-	'as' => 'register',
-	'uses' => 'Auth\AuthController@getRegister'
+	'as' 	=> 'register',
+	'uses' 	=> 'Auth\AuthController@getRegister'
 ]);
 
 Route::post('register', [
-	'as' => 'register',
-	'uses' => 'Auth\AuthController@postRegister'
+	'as' 	=> 'register',
+	'uses' 	=> 'Auth\AuthController@postRegister'
 ]);
 
 Route::get('/activate/{code}', [
-	'as' => 'activate',
-	'uses' => 'Auth\AuthController@getActivate'
+	'as' 	=> 'activate',
+	'uses' 	=> 'Auth\AuthController@getActivate'
 ]);
 
 Route::get('login', [
-	'as' => 'login',
-	'uses' => 'Auth\AuthController@getLogin'
+	'as' 	=> 'login',
+	'uses' 	=> 'Auth\AuthController@getLogin'
 ]);
 
 Route::post('login', [
-	'as' => 'login',
-	'uses' => 'Auth\AuthController@postLogin'
+	'as' 	=> 'login',
+	'uses'	=> 'Auth\AuthController@postLogin'
 ]);
 
 
@@ -68,6 +68,10 @@ Route::resource('preachers', 'PreachersController');
 Route::get('preacher', 'PreachersController@getList');
 // Sermons
 Route::resource('sermons', 'SermonsController');
+Route::get('/{slug}', [
+	'as' 	=> 'show-sermon',
+	'uses'	=> 'FrontController@showSermon'
+]);
 // Articles
 Route::resource('articles', 'ArticlesController');
 // Menú
@@ -76,3 +80,5 @@ Route::resource('menu', 'MenuController');
 Route::resource('ads', 'AdsController');
 // Verses
 Route::resource('verses', 'VersesController');
+// Comments
+Route::resource('comments', 'CommentsController');
