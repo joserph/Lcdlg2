@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Comment;
+use Validator;
 
 class CommentsController extends Controller
 {
@@ -18,7 +20,6 @@ class CommentsController extends Controller
     {
         return view('admin.comments.index');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +27,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.comments.create');
     }
 
     /**
@@ -37,7 +38,32 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(\Request::ajax())
+        {
+            $validator = Validator::make($request->all(), [
+                'nombre'    => 'required',
+                'comentario'=> 'required'
+            ]);
+            if($validator->fails())
+            {
+                return response()->json([
+                    'success'   => false,
+                    'errors'    => $validator->getMessageBag()->toArray()
+                ]);
+            }else{
+                $comment = new Comment($request->all());
+                $comment->save();
+
+                if($comment)
+                {
+                    return response()->json([
+                        'success'   => true,
+                        'message'   => 'El comentario se agregó con exito!',
+                        'comment'   => $comment->toArray()
+                    ]);
+                }
+            }
+        }
     }
 
     /**

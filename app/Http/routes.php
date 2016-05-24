@@ -68,10 +68,6 @@ Route::resource('preachers', 'PreachersController');
 Route::get('preacher', 'PreachersController@getList');
 // Sermons
 Route::resource('sermons', 'SermonsController');
-Route::get('/{slug}', [
-	'as' 	=> 'show-sermon',
-	'uses'	=> 'FrontController@showSermon'
-]);
 // Articles
 Route::resource('articles', 'ArticlesController');
 // Menú
@@ -82,3 +78,10 @@ Route::resource('ads', 'AdsController');
 Route::resource('verses', 'VersesController');
 // Comments
 Route::resource('comments', 'CommentsController');
+Route::get('comment', 'CommentsController@getList');
+// Show Sermon
+Route::get('/{slug}', [
+	'as' 	=> 'show-sermon',
+	'uses'	=> 'FrontController@showSermon'
+]);
+

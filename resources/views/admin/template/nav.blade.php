@@ -57,6 +57,9 @@
                 <a href="{{ route('verses.index') }}"><i class="fa fa-fw fa-book"></i> Versículos</a>
             </li>
             <li>
+                <a href="{{ route('comments.index') }}"><i class="fa fa-fw fa-book"></i> Comentarios</a>
+            </li>
+            <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li>

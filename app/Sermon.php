@@ -51,4 +51,9 @@ class Sermon extends Model implements SluggableInterface
     {
         return $this->belongsTo('App\User', 'id_user');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'id_article');
+    }
 }
