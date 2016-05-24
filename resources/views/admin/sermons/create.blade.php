@@ -38,6 +38,7 @@
         {!! Form::open(['route' => 'sermons.store']) !!}
             {!! Form::hidden('id_user', \Auth::user()->id) !!}
             {!! Form::hidden('update_user', \Auth::user()->id) !!}
+            {!! Form::hidden('tipo', 'predica') !!}
             {!! Form::label('title', 'Título') !!}
             <div class="row">
                 <div class="col-md-10">

@@ -8,6 +8,7 @@
 		<hr>
 		<p class="lead">By {{ $sermon->preacher->nombre }} | <i class="fa fa-calendar fa-fw"></i> {{ $sermon->fecha }}</p>
 		<p class="justify">{{ $sermon->content}}</p>
+		<p>Tags: {{ $sermon->month->fecha }}, {{ $sermon->year->fecha }}</p>
 	</div>
-
+	
 @endsection
