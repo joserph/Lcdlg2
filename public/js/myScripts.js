@@ -201,12 +201,16 @@ function ListComments()
 {
 	var trDatos = $('#comments');
 	var route = 'http://lcdlg2.dev/comment';
+	var idSermon = $('#id_sermon').val();
 	$('#comments').empty();
 	$.get(route, function(respuesta)
 	{
 		$(respuesta).each(function(key, value)
 		{
-			trDatos.append('<p class="text-capitalize"><strong><em>'+ value.nombre +'</em></strong> - '+ value.created_at +'</p><p class="text-capitalize text-justify">'+ value.comentario +'</p><hr>');
+			if(idSermon == value.id_article)
+			{
+				trDatos.append('<p class="text-capitalize" style="color:'+ value.color +'"><strong><em>'+ value.nombre +'</em></strong> - '+ value.date +'</p><p class="text-capitalize text-justify">'+ value.comentario +'</p><hr>');
+			}			
 		});
 	});
 }

@@ -61,4 +61,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Verse', 'id_user');
     }
+
+     public function comments()
+    {
+        return $this->hasMany('App\Comment', 'id_user');
+    }
 }

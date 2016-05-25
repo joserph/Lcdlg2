@@ -8,7 +8,7 @@ class Comment extends Model
 {
     protected $table = 'comments';
 
-    protected $fillable = ['nombre', 'comentario', 'id_user', 'id_article'];
+    protected $fillable = ['nombre', 'comentario', 'id_user', 'id_article', 'color', 'date'];
 
     public function sermon()
     {
@@ -19,4 +19,10 @@ class Comment extends Model
     {
     	return $this->belongsTo('App\Sermon', 'id_article');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'id_user');
+    }
+
 }

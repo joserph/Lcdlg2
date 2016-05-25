@@ -16,5 +16,28 @@
         </div>
     </div>
     @include('flash::message')
-
+    <!-- .table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-responsive">
+            <tr>                
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Comentario</th>         
+                <th class="text-center">Articulo</th>
+                <th class="text-center">Usuario</th>  
+                <th class="text-center">Acción</th>              
+            </tr>
+            @foreach($comments as $item) 
+            <tr>
+                <td class="text-center">{{ $item->nombre }} </td>
+                <td class="text-center">{{ $item->comentario }}</td>
+                <td class="text-center">{{ $item->sermon->title }}</td>
+                <td class="text-center">{{ $item->user->name }}</td>
+                <td class="text-center">
+                    
+                </td>
+            </tr>          
+            @endforeach            
+        </table>
+    </div>
+    <!-- /.table -->
 @endsection

@@ -18,7 +18,10 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        return view('admin.comments.index');
+        $comments = Comment::with('sermon', 'article', 'user')->orderBy('id', 'DESC')->get();
+        //dd($comments);
+        return view('admin.comments.index')
+            ->with('comments', $comments);
     }
 
     public function getList()
@@ -47,6 +50,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Caracas');
         if(\Request::ajax())
         {
             $validator = Validator::make($request->all(), [
@@ -61,6 +65,7 @@ class CommentsController extends Controller
                 ]);
             }else{
                 $comment = new Comment($request->all());
+                $comment->date = date('d/m/Y - H:i:s');
                 $comment->save();
 
                 if($comment)

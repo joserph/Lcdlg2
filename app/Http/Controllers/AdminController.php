@@ -13,6 +13,7 @@ use App\Sermon;
 use App\Menu;
 use App\Ad;
 use App\Verse;
+use App\Comment;
 
 class AdminController extends Controller
 {
@@ -36,6 +37,7 @@ class AdminController extends Controller
         $countMenu = Menu::count();
         $countAds = Ad::count();
         $countVerses = Verse::count();
+        $countComments = Comment::count();
         //dd($countUsers);
         return view('admin.index')
             ->with('countUsers', $countUsers)
@@ -45,7 +47,8 @@ class AdminController extends Controller
             ->with('countArticles', $countArticles)
             ->with('countMenu', $countMenu)
             ->with('countAds', $countAds)
-            ->with('countVerses', $countVerses);
+            ->with('countVerses', $countVerses)
+            ->with('countComments', $countComments);
     }
 
     /**

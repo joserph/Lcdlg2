@@ -8,10 +8,16 @@
 			{!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Tu nombre', 'autofocus']) !!}
 		</div>
 	</div>
+	{!! Form::label('color', 'Selecciona tu color favorito') !!}
+    <div class="row">
+        <div class="col-md-1">
+            {!! Form::color('color', null, ['class' => 'form-control', 'placeholder' => 'Publica tu comentario']) !!}
+        </div>
+    </div>
     {!! Form::label('comentario', 'Comentario') !!}
     <div class="row">
         <div class="col-md-6">
-            {!! Form::textarea('comentario', null, ['class' => 'form-control', 'placeholder' => 'Publica tu comentario', 'autofocus']) !!}
+            {!! Form::textarea('comentario', null, ['class' => 'form-control', 'placeholder' => 'Publica tu comentario']) !!}
         </div>
     </div>
 	<br>	
