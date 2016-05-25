@@ -127,7 +127,7 @@ $(document).ready(function()
 						successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
 						successMessage += '</div>';
 					$(formComment)[0].reset();
-					//ListComments();
+					ListComments();
 					$('.success').show().html(successMessage);
 				}
 			},
@@ -206,7 +206,7 @@ function ListComments()
 	{
 		$(respuesta).each(function(key, value)
 		{
-			trDatos.append('<p>'+ value.nombre +'</p>');
+			trDatos.append('<p class="text-capitalize"><strong><em>'+ value.nombre +'</em></strong> - '+ value.created_at +'</p><p class="text-capitalize text-justify">'+ value.comentario +'</p><hr>');
 		});
 	});
 }

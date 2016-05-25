@@ -11,8 +11,18 @@
 		<p>Tags: {{ $sermon->month->fecha }}, {{ $sermon->year->fecha }}</p>
 		<div>
 			<p class="lead">Comentarios</p>
-			
+			<div id="comments">
+				
+			</div>
+			@include('admin.comments.create')
 		</div>
 	</div>
-	
+
+	<div>
+		<p class="text-capitalize"><strong><em>Jose Perez</em></strong> - 21/05/2016</p>
+		<p class="text-capitalize">Este es un comentario</p>
+	</div>
+	@section('scripts')
+		<script src="{{ asset('js/myScripts.js') }}"></script>
+    @endsection
 @endsection

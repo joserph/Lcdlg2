@@ -20,6 +20,15 @@ class CommentsController extends Controller
     {
         return view('admin.comments.index');
     }
+
+    public function getList()
+    {
+        $comments = Comment::with('sermon', 'article')->orderBy('id', 'DESC')->get();
+        //dd($comments);
+        return response()->json(
+            $comments->toArray()
+        );
+    }
     /**
      * Show the form for creating a new resource.
      *
