@@ -6,23 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Date;
-use App\Preacher;
-use App\Sermon;
-use App\Menu;
-use App\Ad;
-use App\Verse;
-use App\Comment;
 use App\Prayer;
+use Validator;
 
-class AdminController extends Controller
+class PrayersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('editor');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -30,28 +18,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $countUsers = User::count();
-        $countDates = Date::count();
-        $countPreachers = Preacher::count();
-        $countSermons = Sermon::where('tipo', '=', 'predica')->count();
-        $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
-        $countMenu = Menu::count();
-        $countAds = Ad::count();
-        $countVerses = Verse::count();
-        $countComments = Comment::count();
-        $countPrayers = Prayer::count();
-        //dd($countUsers);
-        return view('admin.index')
-            ->with('countUsers', $countUsers)
-            ->with('countDates', $countDates)
-            ->with('countPreachers', $countPreachers)
-            ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles)
-            ->with('countMenu', $countMenu)
-            ->with('countAds', $countAds)
-            ->with('countVerses', $countVerses)
-            ->with('countComments', $countComments)
-            ->with('countPrayers', $countPrayers);
+        $prayers = Prayer::orderBy('id', 'DESC')->get();
+        //dd($prayers);
+        return view('admin.prayers.index')
+            ->with('prayers', $prayers);
     }
 
     /**
@@ -61,7 +31,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.prayers.create');
     }
 
     /**
@@ -72,7 +42,35 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('America/Caracas');
+        if(\Request::ajax())
+        {
+            $validator = Validator::make($request->all(), [
+                'nombre'    => 'required',
+                'email'     => 'required|email',
+                'peticion'  => 'required'
+            ]);
+
+            if($validator->fails())
+            {
+                return response()->json([
+                    'success'   => false,
+                    'errors'    => $validator->getMessageBag()->toArray()
+                ]);
+            }else{
+                $prayer = new Prayer($request->all());
+                $prayer->save();
+
+                if($prayer)
+                {
+                    return response()->json([
+                        'success'   => true,
+                        'message'   => 'La petición se ha enviado con exito, Gracias!',
+                        'prayer'    => $prayer->toArray()
+                    ]);
+                }                
+            }
+        }
     }
 
     /**

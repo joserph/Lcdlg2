@@ -57,7 +57,10 @@
                 <a href="{{ route('verses.index') }}"><i class="fa fa-fw fa-book"></i> Versículos</a>
             </li>
             <li>
-                <a href="{{ route('comments.index') }}"><i class="fa fa-fw fa-book"></i> Comentarios</a>
+                <a href="{{ route('comments.index') }}"><i class="fa fa-fw fa-comments"></i> Comentarios</a>
+            </li>
+             <li>
+                <a href="{{ route('prayers.index') }}"><i class="fa fa-fw fa-commenting"></i> Peticiones de Oración</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>

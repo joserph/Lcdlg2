@@ -79,6 +79,8 @@ Route::resource('verses', 'VersesController');
 // Comments
 Route::resource('comments', 'CommentsController');
 Route::get('comment', 'CommentsController@getList');
+// Prayers
+Route::resource('prayers', 'PrayersController');
 // Show Sermon
 Route::get('/{slug}', [
 	'as' 	=> 'show-sermon',

@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header"><i class="fa fa-cog fa-fw"></i> Bienvenidos al Panel de Administación</h2>
+            <h2 class="page-header"><i class="fa fa-cog fa-fw"></i> Bienvenido al Panel de Administación</h2>
             <ol class="breadcrumb">
                 <li class="active">
                     <i class="fa fa-cogs fa-fw"></i> Módulos
@@ -244,6 +244,32 @@
                     </div>
                 </div>
                 <a href="{{ route('comments.index') }}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Detalles</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-commenting fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ $countPrayers }}</div>
+                            @if($countPrayers > 1)
+                                <div>Peticiones!</div>
+                            @else
+                                <div>Petición!</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('prayers.index') }}">
                     <div class="panel-footer">
                         <span class="pull-left">Ver Detalles</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -3,7 +3,7 @@
 @section('title')
 
 @section('content')
-	<!-- Anuncios -->
+	<!-- Ads -->
 	<ul class="nav nav-tabs">
 		@foreach($anuncios as $item)
 			@if($contador == 0)
@@ -35,6 +35,11 @@
   			?>
   		@endforeach
 	</div>
-	<!-- /. Anuncios -->
-
+	<!-- /. Ads -->
+	<!-- Prayer -->
+		@include('admin.prayers.create')
+	<!-- /. Prayer -->
+	@section('scripts')
+		<script src="{{ asset('js/myScripts.js') }}"></script>
+    @endsection
 @endsection
