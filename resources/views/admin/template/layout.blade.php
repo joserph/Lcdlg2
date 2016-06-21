@@ -23,9 +23,9 @@
     <![endif]-->
 
 </head>
-<body>
-    <div id="wrapper">
-
+<body ng-app="Church">
+    <div ng-view="" id="wrapper">
+        
         @include('admin.template.nav')
 
         <div id="page-wrapper">
@@ -44,13 +44,19 @@
 
     </div>
     <!-- /#wrapper -->
+    <!-- AngularJS -->
+    <script src="{{ asset('angularjs/lib/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('angularjs/lib/angular/angular-resource.min.js') }}"></script>
+    <script src="{{ asset('angularjs/lib/angular/angular-route.min.js') }}"></script>
 
+    <script src="{{ asset('angularjs/scripts/router.js') }}"></script>
     <!-- jQuery -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.js') }}"></script>
+
     @yield('scripts')
 </body>
 </html>

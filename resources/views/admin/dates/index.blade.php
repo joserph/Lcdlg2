@@ -3,6 +3,7 @@
 @section('title') Fehcas | Panel de administración @endsection
 
 @section('content')
+@{{"hola"}}
 	<!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">

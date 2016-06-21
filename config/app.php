@@ -152,6 +152,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Styde\Html\HtmlServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*
