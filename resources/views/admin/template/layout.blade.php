@@ -44,12 +44,6 @@
 
     </div>
     <!-- /#wrapper -->
-    <!-- AngularJS -->
-    <script src="{{ asset('angularjs/lib/angular/angular.min.js') }}"></script>
-    <script src="{{ asset('angularjs/lib/angular/angular-resource.min.js') }}"></script>
-    <script src="{{ asset('angularjs/lib/angular/angular-route.min.js') }}"></script>
-
-    <script src="{{ asset('angularjs/scripts/router.js') }}"></script>
     <!-- jQuery -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
