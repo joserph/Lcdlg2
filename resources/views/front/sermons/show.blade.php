@@ -7,7 +7,7 @@
 		<h1>{{ $sermon->title }}</h1>
 		<hr>
 		<p class="lead">By {{ $sermon->preacher->nombre }} | <i class="fa fa-calendar fa-fw"></i> {{ $sermon->fecha }}</p>
-		<p class="justify">{{ $sermon->content}}</p>
+		<p>{{ $sermon->content}}</p>
 		<p>Tags: {{ $sermon->month->fecha }}, {{ $sermon->year->fecha }}</p>
 		<input type="hidden" value="{{ $sermon->id }}" id="id_sermon">
 		<div>

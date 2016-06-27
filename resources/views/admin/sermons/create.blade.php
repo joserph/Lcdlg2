@@ -6,7 +6,9 @@
     <!-- Plugin Chosen -->
     <link rel="stylesheet" href="{{ asset('plugins/chosen/chosen.css') }}">
     <!-- Plugin trumbowyg -->
-    <link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">-->
+    <!-- Plugin Froala Wysiwyg Editor -->
+    <link rel="stylesheet" href="{{ asset('plugins/froala/css/froala_editor.min.css') }}">
 @endsection
 @section('content')
 	<!-- Page Heading -->
@@ -105,14 +107,19 @@
         <!-- Chosen JavaScript -->
         <script src="{{ asset('plugins/chosen/chosen.jquery.js') }}"></script>
         <!-- Trumbowyg JavaScript -->
-        <script src="{{ asset('plugins/trumbowyg/trumbowyg.js') }}"></script>
+        <!--<script src="{{ asset('plugins/trumbowyg/trumbowyg.js') }}"></script>-->
+        <!-- Plugin Froala Wysiwyg Editor -->
+        <script src="{{ asset('plugins/froala/js/froala_editor.min.js') }}"></script>
         <script>
             $('.select-mes').chosen();
             $('.select-anio').chosen();
             $('.select-pre').chosen();
-            $('.content').trumbowyg();
-            $('.audio').trumbowyg();
-            $('.video').trumbowyg();
+            $(function() {
+                $('.content').editable({inlineMode: false});
+                $('.audio').editable({inlineMode: false});
+                $('.video').editable({inlineMode: false});
+            });
+           
         </script>
     @endsection
 @endsection
