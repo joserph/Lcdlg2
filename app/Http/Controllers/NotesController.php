@@ -6,16 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Comment;
+use App\Note;
 use Validator;
-use Carbon\Carbon;
 
-class CommentsController extends Controller
+class NotesController extends Controller
 {
-    public function __construct()
-    {
-        
-    }
     /**
      * Display a listing of the resource.
      *
@@ -23,20 +18,9 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::with('sermon', 'article', 'user')->orderBy('id', 'DESC')->get();
-        //dd($comments);
-        return view('admin.comments.index')
-            ->with('comments', $comments);
+        //
     }
 
-    public function getList()
-    {
-        $comments = Comment::with('sermon', 'article')->orderBy('id', 'DESC')->get();
-        //dd($comments);
-        return response()->json(
-            $comments->toArray()
-        );
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +28,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        return view('admin.comments.create');
+        return view('admin.notes.create');
     }
 
     /**
@@ -55,13 +39,12 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        date_default_timezone_set('America/Caracas');
         if(\Request::ajax())
         {
             $validator = Validator::make($request->all(), [
-                'nombre'    => 'required',
-                'comentario'=> 'required'
+                'contenido' => 'required'
             ]);
+
             if($validator->fails())
             {
                 return response()->json([
@@ -69,18 +52,17 @@ class CommentsController extends Controller
                     'errors'    => $validator->getMessageBag()->toArray()
                 ]);
             }else{
-                $comment = new Comment($request->all());
-                $comment->date = date('d/m/Y - H:i:s');
-                $comment->save();
+                $note = new Note($request->all());
+                $note->save();
 
-                if($comment)
+                if($note)
                 {
                     return response()->json([
                         'success'   => true,
-                        'message'   => 'El comentario se agregó con exito!',
-                        'comment'   => $comment->toArray()
+                        'message'   => 'La nota se creo con exito!',
+                        'note'      => $note->toArray()
                     ]);
-                }
+                }                
             }
         }
     }

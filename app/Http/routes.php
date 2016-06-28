@@ -86,4 +86,6 @@ Route::get('/{slug}', [
 	'as' 	=> 'show-sermon',
 	'uses'	=> 'FrontController@showSermon'
 ]);
+// Notes
+Route::resource('notes', 'NotesController');
 

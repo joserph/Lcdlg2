@@ -9,9 +9,15 @@ use App\Http\Controllers\Controller;
 use App\Menu;
 use App\Ad;
 use App\Sermon;
+use Carbon\Carbon;
 
 class FrontController extends Controller
 {
+    public function __construct()
+    {
+        Carbon::setlocale('es');
+    }
+    /*
     /**
      * Display a listing of the resource.
      *

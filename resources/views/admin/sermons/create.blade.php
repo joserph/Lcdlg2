@@ -118,8 +118,7 @@
                 $('.content').editable({inlineMode: false});
                 $('.audio').editable({inlineMode: false});
                 $('.video').editable({inlineMode: false});
-            });
-           
+            });           
         </script>
     @endsection
 @endsection

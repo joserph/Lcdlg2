@@ -11,7 +11,7 @@
 	{!! Form::label('color', 'Selecciona tu color favorito') !!}
     <div class="row">
         <div class="col-md-1">
-            {!! Form::color('color', null, ['class' => 'form-control', 'placeholder' => 'Publica tu comentario']) !!}
+            {!! Form::color('color', null, ['class' => 'form-control']) !!}
         </div>
     </div>
     {!! Form::label('comentario', 'Comentario') !!}
