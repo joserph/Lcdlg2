@@ -13,32 +13,42 @@
 		<input type="hidden" value="{{ $sermon->id }}" id="id_sermon">
 	  	<hr>
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#notas" data-toggle="tab" aria-expanded="false">Mis notas</a></li>
+			<li class="active"><a href="#notas" data-toggle="tab" aria-expanded="true">Mis notas</a></li>
 			<li class=""><a href="#predicas" data-toggle="tab" aria-expanded="true">Otras prédicas de {{ $sermon->preacher->nombre }}</a></li>
 			<li class=""><a href="#tags" data-toggle="tab" aria-expanded="true">Artículos relacionados</a></li>
 		</ul>
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade" id="notas">
+			<div class="tab-pane fade active in" id="notas">
+				@include('admin.notes.create')
+				<hr>
+				<ul class="list-group">
+					@foreach($notes as $item)
+					  	<li class="list-group-item" style="color:{{ $item->color }}">
+					    	<span class="badge">{{ $item->created_at->diffForHumans() }}</span>
+					    	{{ $item->contenido }}
+					    	<span class="pull-right"><a href="{{ route('notes.edit', $item->id) }}"><i class="fa fa-edit fa-fw"></i></a></span>
+					  	</li>
+				  	@endforeach
+				</ul>
 				<div id="notes">
 					
 				</div>
-				@include('admin.notes.create')
+				
 			</div>
-			<div class="tab-pane fade active in" id="predicas">
-				<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+			<div class="tab-pane fade" id="predicas">
+				<p>Food truck fixie </p>
 			</div>
 			<div class="tab-pane fade" id="tags">
-				<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+				<p>Etsy mixtape wayfarers, ethical </p>
 			</div>
 		</div>
-		<hr>
-		<div>
+		<!--<div>
 			<p class="lead">Comentarios</p>
 			<div id="comments">
 				
 			</div>
 			@include('admin.comments.create')
-		</div>
+		</div>-->
 	</div>
 	
 

@@ -81,11 +81,15 @@ Route::resource('comments', 'CommentsController');
 Route::get('comment', 'CommentsController@getList');
 // Prayers
 Route::resource('prayers', 'PrayersController');
-// Show Sermon
+// Notes
+Route::resource('notes', 'NotesController');
+Route::get('note', 'NotesController@getList');
+
+
+// Show Sermon (Ultimo)
 Route::get('/{slug}', [
 	'as' 	=> 'show-sermon',
 	'uses'	=> 'FrontController@showSermon'
 ]);
-// Notes
-Route::resource('notes', 'NotesController');
+
 

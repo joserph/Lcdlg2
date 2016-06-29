@@ -10,6 +10,7 @@ use App\Menu;
 use App\Ad;
 use App\Sermon;
 use Carbon\Carbon;
+use App\Note;
 
 class FrontController extends Controller
 {
@@ -42,12 +43,14 @@ class FrontController extends Controller
         $previewMenu = Menu::orderBy('peso', 'ASC')->get();//Menú
         $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();//Menú
         $sermon = Sermon::with('month', 'year', 'preacher', 'user')->where('slug', '=', $slug)->first();
+        $notes = Note::with('sermon', 'user')->where('id_sermon', '=', $sermon->id)->orderBy('id', 'DESC')->get();
         
         //dd($sermon);
 
         return view('front.sermons.show')
             ->with('previewMenu', $previewMenu)
             ->with('hijos', $hijos)
-            ->with('sermon', $sermon);
+            ->with('sermon', $sermon)
+            ->with('notes', $notes);
     }
 }

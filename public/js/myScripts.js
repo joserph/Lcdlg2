@@ -171,7 +171,7 @@ $(document).ready(function()
 						successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
 						successMessage += '</div>';
 					$(formPrayer)[0].reset();
-					//ListComments();
+					
 					$('.success').show().html(successMessage);
 				}
 			},
@@ -183,6 +183,51 @@ $(document).ready(function()
 		return false;
 	});
 	// End prayer
+	// Notes
+	var formNote = $('.add-note');
+	formNote.on('submit', function()
+	{
+		$.ajax({
+			type: formNote.attr('method'),
+			url: formNote.attr('action'),
+			data: formNote.serialize(),
+			success: function(data)
+			{
+				$('.error').html('');
+				$('.success').hide().html('');
+				if(data.success == false)
+				{
+					var errors = '';
+						errors += '<div class="alert alert-warning">';
+						errors += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+						errors += '<h4><i class="fa fa-exclamation-triangle fa-fw"></i> Por favor corrige los siguentes errores:</h4>';
+					for(datos in data.errors)
+					{
+						errors += '<li>' + data.errors[datos] + '</li>'
+					}
+						errors += '</div>';
+					$('.error').html(errors);
+				}else{
+					var successMessage = '';
+						successMessage += '<div class="alert alert-success">';
+						successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+						successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+						successMessage += '</div>';
+					$(formNote)[0].reset();
+					//ListNotes();
+					location.reload();
+					$('.success').show().html(successMessage);
+				}
+			},
+			error: function()
+			{
+				$('.error').html(errors);
+			}
+		});
+		return false;
+	});
+	//ListNotes();
+	// End Notes
 });
 
 
@@ -254,6 +299,27 @@ function ListComments()
 			{
 				trDatos.append('<p class="text-capitalize" style="color:'+ value.color +'"><strong><em>'+ value.nombre +'</em></strong> - '+ value.date +'</p><p class="text-capitalize text-justify">'+ value.comentario +'</p><hr>');
 			}			
+		});
+	});
+}
+// End Comment
+// Notes
+function ListNotes()
+{
+	var trDatos = $('#notes');
+	var route = 'http://lcdlg2.dev/note';
+	var idSermon = $('#id_sermon').val();
+	$('#notes').empty();
+	$.get(route, function(respuesta)
+	{
+		$(respuesta).each(function(key, value)
+		{
+			if(idSermon == value.id_sermon)
+			{
+				//trDatos.append('<div class="panel panel-default" style="color:'+ value.color +'"><div class="panel-body">'+ value.contenido +'</div><div class="panel-footer">' + value.created_at + '</div></div><hr>')
+				//trDatos.append('<span class="label label-default" style="color:'+ value.color +'">'+ value.contenido +' - ' + value.created_at + '</span><hr>')
+				trDatos.append('<ul class="list-group" style="color:'+ value.color +'"><li class="list-group-item"><span class="badge">'+ value.created_at +'</span>'+ value.contenido +'</li></ul>')
+			}
 		});
 	});
 }

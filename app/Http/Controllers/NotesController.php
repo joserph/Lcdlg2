@@ -21,6 +21,15 @@ class NotesController extends Controller
         //
     }
 
+    public function getList()
+    {
+        $notes = Note::with('sermon', 'user')->orderBy('id', 'DESC')->get();
+        //dd($notes);
+        return response()->json(
+            $notes->toArray()
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      *
