@@ -12,6 +12,7 @@
 		<p>Tags: {{ $sermon->month->fecha }}, {{ $sermon->year->fecha }}</p>
 		<input type="hidden" value="{{ $sermon->id }}" id="id_sermon">
 	  	<hr>
+	  	<div class="success"></div>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#notas" data-toggle="tab" aria-expanded="true">Mis notas</a></li>
 			<li class=""><a href="#predicas" data-toggle="tab" aria-expanded="true">Otras prédicas de {{ $sermon->preacher->nombre }}</a></li>
@@ -21,19 +22,20 @@
 			<div class="tab-pane fade active in" id="notas">
 				@include('admin.notes.create')
 				<hr>
-				<ul class="list-group">
+				<!--<ul class="list-group">
 					@foreach($notes as $item)
 					  	<li class="list-group-item" style="color:{{ $item->color }}">
 					    	<span class="badge">{{ $item->created_at->diffForHumans() }}</span>
 					    	{{ $item->contenido }}
-					    	<span class="pull-right"><a href="{{ route('notes.edit', $item->id) }}"><i class="fa fa-edit fa-fw"></i></a></span>
+					    	<span class="pull-right"><button type="button" value="{{ $item->id }}" onclick="ShowNota(this);" class="pull-right btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button></span> 
 					  	</li>
 				  	@endforeach
+				</ul>-->
+				<ul class="list-group">
+					<div id="notes">
+						
+					</div>
 				</ul>
-				<div id="notes">
-					
-				</div>
-				
 			</div>
 			<div class="tab-pane fade" id="predicas">
 				<p>Food truck fixie </p>
@@ -54,5 +56,7 @@
 
 	@section('scripts')
 		<script src="{{ asset('js/myScripts.js') }}"></script>
+		<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+		<script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>		
     @endsection
 @endsection

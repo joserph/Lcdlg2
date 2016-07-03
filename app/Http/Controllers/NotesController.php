@@ -48,6 +48,7 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Caracas');
         if(\Request::ajax())
         {
             $validator = Validator::make($request->all(), [
@@ -95,7 +96,10 @@ class NotesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $note = Note::find($id);
+        return response()->json(
+            $note->toArray()
+        );
     }
 
     /**
@@ -107,7 +111,14 @@ class NotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $note = Note::find($id);
+        $note->fill($request->all());
+        $note->save();
+
+        return response()->json([
+            'success'   => true,
+            'message'   => 'La nota <b>' . $note->fecha . '</b> se actualizó con exito!'
+        ]);
     }
 
     /**

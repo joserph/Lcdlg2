@@ -126,7 +126,7 @@ class DatesController extends Controller
 
         return response()->json([
             'success'   => true,
-            'message'   => 'La fecha <b>' . $date->fecha . '</b> se actualizó con exito!'
+            'message'   => 'La fecha se actualizó con exito!'
         ]);
     }
 

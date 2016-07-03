@@ -214,8 +214,8 @@ $(document).ready(function()
 						successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
 						successMessage += '</div>';
 					$(formNote)[0].reset();
-					//ListNotes();
-					location.reload();
+					ListNotes();
+					//location.reload();
 					$('.success').show().html(successMessage);
 				}
 			},
@@ -226,7 +226,7 @@ $(document).ready(function()
 		});
 		return false;
 	});
-	//ListNotes();
+	ListNotes();
 	// End Notes
 });
 
@@ -284,6 +284,7 @@ function ShowPredicador(boton)
 	});
 }
 // End Predicadores
+
 // Comment
 function ListComments()
 {
@@ -316,14 +317,27 @@ function ListNotes()
 		{
 			if(idSermon == value.id_sermon)
 			{
+				var fecha = value.created_at;
+				var fechaFinal = moment(fecha).locale('es').fromNow();
 				//trDatos.append('<div class="panel panel-default" style="color:'+ value.color +'"><div class="panel-body">'+ value.contenido +'</div><div class="panel-footer">' + value.created_at + '</div></div><hr>')
 				//trDatos.append('<span class="label label-default" style="color:'+ value.color +'">'+ value.contenido +' - ' + value.created_at + '</span><hr>')
-				trDatos.append('<ul class="list-group" style="color:'+ value.color +'"><li class="list-group-item"><span class="badge">'+ value.created_at +'</span>'+ value.contenido +'</li></ul>')
+				trDatos.append('<li class="list-group-item" style="color:'+ value.color +'"><span class="badge">'+ fechaFinal +'</span>'+ value.contenido +'<span class="pull-right"><button type="button" value='+ value.id +' onclick="ShowNota(this);" class="pull-right btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button></span></li>')
 			}
 		});
 	});
 }
 
+function ShowNota(boton)
+{
+	var route = 'http://lcdlg2.dev/notes/'+ boton.value +'/edit';
+	$.get(route, function(respuesta)
+	{
+		$('#contenidoEdit').val(respuesta.contenido);
+		$('#colorEdit').val(respuesta.color);
+		$('#id').val(respuesta.id);
+	})
+}
+// End Notes
 
 /*
  * ******************** EDIT. ********************
@@ -398,7 +412,40 @@ $('#edit-predicador').click(function()
 	});
 });
 // End predicadores
+// Notes
+$('#edit-nota').click(function()
+{
+	var id = $('#id').val();
+	var contenido = $('#contenidoEdit').val();
+	var color = $('#colorEdit').val();
+	var route = 'http://lcdlg2.dev/notes/'+id+'';
+	var token = $('#token').val();
 
+	$.ajax({
+		url: route,
+		headers: {'X-CSRF-TOKEN': token},
+		type: 'PUT',
+		dataType: 'json',
+		data: {contenido: contenido, color: color},
+		success: function(data)
+		{
+			if(data.success == false)
+			{
+				console.log("Error");
+			}else{
+				var successMessage = '';
+				successMessage += '<div class="alert alert-warning">';
+				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+				successMessage += '</div>';
+				ListNotes();
+				$('#myModal').modal('hide');
+				$('.success').show().html(successMessage);
+			}
+		}
+	})
+});
+// End notes
 
 
 /*
