@@ -65,6 +65,9 @@
                         </ul>
                         <!-- /.nav-second-level -->
                             </li>
+                            <li>
+                                <a href="{{ route('church.index') }}"><i class="fa fa-fw fa-institution"></i> Iglesia</a>
+                            </li>
                             <li class="active">
                                 <a href="/" target="_blanck"><i class="fa fa-fw fa-eye"></i> Página principal</a>
                             </li>

@@ -60,6 +60,8 @@ Route::resource('admin', 'AdminController');
 
 // Users
 Route::resource('users', 'UsersController');
+// Church
+Route::resource('church', 'ChurchController');
 // Dates
 Route::resource('dates', 'DatesController');
 Route::get('date', 'DatesController@getList');

@@ -6,23 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Date;
-use App\Preacher;
-use App\Sermon;
-use App\Menu;
-use App\Ad;
-use App\Verse;
-use App\Comment;
-use App\Prayer;
 use App\Church;
+use App\Http\Requests\ChurchRequest;
 
-class AdminController extends Controller
+class ChurchController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('editor');
+        $this->middleware('admin');
     }
     /**
      * Display a listing of the resource.
@@ -32,29 +24,9 @@ class AdminController extends Controller
     public function index()
     {
         $church = Church::find(1);
-        $countUsers = User::count();
-        $countDates = Date::count();
-        $countPreachers = Preacher::count();
-        $countSermons = Sermon::where('tipo', '=', 'predica')->count();
-        $countArticles = Sermon::where('tipo', '=', 'articulo')->count();
-        $countMenu = Menu::count();
-        $countAds = Ad::count();
-        $countVerses = Verse::count();
-        $countComments = Comment::count();
-        $countPrayers = Prayer::count();
-        //dd($countUsers);
-        return view('admin.index')
-            ->with('church', $church)
-            ->with('countUsers', $countUsers)
-            ->with('countDates', $countDates)
-            ->with('countPreachers', $countPreachers)
-            ->with('countSermons', $countSermons)
-            ->with('countArticles', $countArticles)
-            ->with('countMenu', $countMenu)
-            ->with('countAds', $countAds)
-            ->with('countVerses', $countVerses)
-            ->with('countComments', $countComments)
-            ->with('countPrayers', $countPrayers);
+        //dd($church);
+        return view('admin.church.index')
+            ->with('church', $church);
     }
 
     /**
@@ -64,7 +36,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        //return view('admin.church.create');
     }
 
     /**
@@ -73,9 +45,13 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ChurchRequest $request)
     {
-        //
+        /*$church = new Church($request->all());
+        $church->save();
+
+        flash()->success('La iglesia <b>' . $church->nombre . '</b> se agregó con exito!');
+        return redirect()->route('church.index');*/
     }
 
     /**
@@ -97,7 +73,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $church = Church::find($id);
+        return view('admin.church.edit')
+            ->with('church', $church);
     }
 
     /**
@@ -107,9 +85,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ChurchRequest $request, $id)
     {
-        //
+        $church = Church::find($id);
+        $church->fill($request->all());
+        $church->save();
+
+        flash()->warning('La Iglesia <b>' . $church->nombre . '</b> se actualizó con exito!');
+        return redirect()->route('church.index');
     }
 
     /**

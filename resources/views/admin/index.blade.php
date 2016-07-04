@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header"><i class="fa fa-cog fa-fw"></i> Bienvenido al Panel de Administación</h2>
+            <h2 class="page-header"><i class="fa fa-cog fa-fw"></i> Bienvenido al Panel de Administación <small>Iglesia {{ $church->nombre }}</small></h2>
             <ol class="breadcrumb">
                 <li class="active">
                     <i class="fa fa-cogs fa-fw"></i> Módulos

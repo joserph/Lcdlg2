@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(UsersTableSeeder::class);
+        $this->call(ChurchTableSeeder::class);
         $this->command->info('All table seeded!');
 
         Model::reguard();
