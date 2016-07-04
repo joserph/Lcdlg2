@@ -321,7 +321,7 @@ function ListNotes()
 				var fechaFinal = moment(fecha).locale('es').fromNow();
 				//trDatos.append('<div class="panel panel-default" style="color:'+ value.color +'"><div class="panel-body">'+ value.contenido +'</div><div class="panel-footer">' + value.created_at + '</div></div><hr>')
 				//trDatos.append('<span class="label label-default" style="color:'+ value.color +'">'+ value.contenido +' - ' + value.created_at + '</span><hr>')
-				trDatos.append('<li class="list-group-item" style="color:'+ value.color +'"><span class="badge">'+ fechaFinal +'</span>'+ value.contenido +'<span class="pull-right"><button type="button" value='+ value.id +' onclick="ShowNota(this);" class="pull-right btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button></span></li>')
+				trDatos.append('<li class="list-group-item" style="color:'+ value.color +'"><span class="badge">'+ fechaFinal +'</span>'+ value.contenido +'<span class="pull-right"><button type="button" value='+ value.id +' onclick="ShowNota(this);" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button> <button type="button" value='+ value.id +' onclick="DeleteNote(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i></button></span></li>')
 			}
 		});
 	});
@@ -495,3 +495,32 @@ function DeletePredicador(boton)
 	}
 }
 // End predicadores
+// Notes
+function DeleteNote(boton)
+{
+	var route = 'http://lcdlg2.dev/notes/'+boton.value+'';
+	var token = $('#token').val();
+	var action = confirm('¿Seguro de eliminar nota?');
+	if(action)
+	{
+		$.ajax({
+			url: route,
+			headers: {'X-CSRF-TOKEN': token},
+			type: 'DELETE',
+			dataType: 'json',
+			success: function(data)
+			{
+				var successMessage = '';
+				successMessage += '<div class="alert alert-danger">';
+				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+				successMessage += '</div>';
+				ListNotes();
+				$('.success').show().html(successMessage);
+			}
+		});
+	}
+}
+
+
+// End Notes

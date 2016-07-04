@@ -16,6 +16,7 @@ use App\Verse;
 use App\Comment;
 use App\Prayer;
 use App\Church;
+use App\Note;
 
 class AdminController extends Controller
 {
@@ -42,6 +43,7 @@ class AdminController extends Controller
         $countVerses = Verse::count();
         $countComments = Comment::count();
         $countPrayers = Prayer::count();
+        $countNotes = Note::count();
         //dd($countUsers);
         return view('admin.index')
             ->with('church', $church)
@@ -54,7 +56,8 @@ class AdminController extends Controller
             ->with('countAds', $countAds)
             ->with('countVerses', $countVerses)
             ->with('countComments', $countComments)
-            ->with('countPrayers', $countPrayers);
+            ->with('countPrayers', $countPrayers)
+            ->with('countNotes', $countNotes);
     }
 
     /**

@@ -8,9 +8,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Note;
 use Validator;
+use Carbon\Carbon;
 
 class NotesController extends Controller
 {
+    public function __construct()
+    {
+        Carbon::setlocale('es');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,9 @@ class NotesController extends Controller
      */
     public function index()
     {
-        //
+        $notes = Note::with('sermon', 'user')->orderBy('id', 'DESC')->get();
+        return view('admin.notes.index')
+            ->with('notes', $notes);
     }
 
     public function getList()
@@ -129,6 +136,12 @@ class NotesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $note = Note::find($id);
+        $note->delete();
+
+        return response()->json([
+            'success'   => true,
+            'message'   => 'La nota se eliminó con exito!'
+        ]);
     }
 }

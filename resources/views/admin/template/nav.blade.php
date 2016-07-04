@@ -98,8 +98,11 @@
                             <li>
                                 <a href="{{ route('comments.index') }}"><i class="fa fa-fw fa-comments"></i> Comentarios</a>
                             </li>
-                             <li>
+                            <li>
                                 <a href="{{ route('prayers.index') }}"><i class="fa fa-fw fa-commenting"></i> Peticiones de Oración</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('notes.index') }}"><i class="fa fa-fw fa-sticky-note"></i> Notas</a>
                             </li>
                         </ul>
                     </div>
