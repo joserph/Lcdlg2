@@ -36,7 +36,7 @@ $(document).ready(function()
 					$(formFecha)[0].reset();
 					ListFechas();										
 					$('#myModal').modal('hide');
-					$('.success').show().html(successMessage).fadeOut(4000);
+					$('.success').show().html(successMessage);
 				}
 			},
 			error: function(errors)
@@ -83,7 +83,7 @@ $(document).ready(function()
 					$(formPredicador)[0].reset();
 					ListPredicador();									
 					$('#myModal').modal('hide');
-					$('.success').show().html(successMessage).fadeOut(4000);
+					$('.success').show().html(successMessage);
 				}
 			},
 			error: function()
@@ -244,7 +244,7 @@ function ListFechas()
 	{
 		$(respuesta).each(function(key, value)
 		{
-			trDatos.append('<tr><td class="text-center">'+ value.fecha +'</td><td class="text-center">'+ value.tipo +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowFecha(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeleteFecha(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
+			trDatos.append('<tr><td class="text-center">'+ value.fecha +'</td><td class="text-center">'+ value.tipo +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowFecha(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeleteFecha(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
 		});
 	});	
 }
@@ -269,7 +269,7 @@ function ListPredicador()
 	{
 		$(respuesta).each(function(key, value)
 		{
-			trDatos.append('<tr><td class="text-center">'+ value.nombre +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowPredicador(this);" data-toggle="modal" data-target="#myModal3" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeletePredicador(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
+			trDatos.append('<tr><td class="text-center">'+ value.nombre +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowPredicador(this);" data-toggle="modal" data-target="#myModal3" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeletePredicador(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
 		});
 	});
 }
@@ -371,7 +371,7 @@ $('#edit-fecha').click(function()
 				successMessage += '</div>';
 				ListFechas();
 				$('#myModal2').modal('hide');
-				$('.success').show().html(successMessage).fadeOut(4000);
+				$('.success').show().html(successMessage);
 			}
 			
 		}
@@ -406,7 +406,7 @@ $('#edit-predicador').click(function()
 				successMessage += '</div>';
 				ListPredicador();
 				$('#myModal3').modal('hide');
-				$('.success').show().html(successMessage).fadeOut(4000);
+				$('.success').show().html(successMessage);
 			}
 		}
 	});
@@ -464,10 +464,15 @@ function DeleteFecha(boton)
 			headers: {'X-CSRF-TOKEN': token},
 			type: 'DELETE',
 			dataType: 'json',
-			success: function()
+			success: function(data)
 			{
+				var successMessage = '';
+				successMessage += '<div class="alert alert-danger">';
+				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+				successMessage += '</div>';
 				ListFechas();
-				$('.deleteFecha').show().fadeOut(4000);		
+				$('.success').show().html(successMessage);	
 			}
 		});
 	}	
@@ -486,10 +491,15 @@ function DeletePredicador(boton)
 			headers: {'X-CSRF-TOKEN': token},
 			type: 'DELETE',
 			dataType: 'json',
-			success: function()
+			success: function(data)
 			{
+				var successMessage = '';
+				successMessage += '<div class="alert alert-danger">';
+				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+				successMessage += '</div>';
 				ListPredicador();
-				$('.deletePredicador').show().fadeOut(4000);
+				$('.success').show().html(successMessage);
 			}
 		});
 	}

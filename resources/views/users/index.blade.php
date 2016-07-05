@@ -43,7 +43,7 @@
                 </td>
                 @if(Auth::user()->role == 'admin') 
                     <td class="text-center">                                                                                  
-                        <a href="{{ route('users.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</a>                                    
+                        <a href="{{ route('users.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>                                    
                     </td>
                 @endif    
             </tr>

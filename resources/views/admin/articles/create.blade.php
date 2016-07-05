@@ -38,6 +38,9 @@
             {!! Form::hidden('id_user', \Auth::user()->id) !!}
             {!! Form::hidden('update_user', \Auth::user()->id) !!}
             {!! Form::hidden('tipo', 'articulo') !!}
+            {!! Form::hidden('id_preacher', 1) !!}
+            {!! Form::hidden('id_month', 1) !!}
+            {!! Form::hidden('id_year', 1) !!}
             {!! Form::label('title', 'Título') !!}
             <div class="row">
                 <div class="col-md-10">

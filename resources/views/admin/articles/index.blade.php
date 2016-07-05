@@ -34,7 +34,7 @@
                 <!--<td class="text-center">{{ $item->content }}</td>-->
                 <td class="text-center">{{ $item->user->name }}</td>
                 <td class="text-center">
-                    <a href="{{ route('articles.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</a>
+                    <a href="{{ route('articles.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>
                 </td>
             </tr>          
             @endforeach            

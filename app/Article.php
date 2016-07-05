@@ -16,7 +16,10 @@ class Article extends Model
     	'tipo', 
     	'audio',
     	'video', 
-    	'comentatio', 
+    	'comentatio',
+        'id_preacher',
+        'id_month',
+        'id_year',
     	'update_user',
     	'id_user'];
 
@@ -28,5 +31,10 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment', 'id_article');
+    }
+
+    public function preacher()
+    {
+        return $this->belongsTo('App\Preacher', 'id_preacher');
     }
 }
