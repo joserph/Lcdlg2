@@ -14,43 +14,54 @@
 	  	<hr>
 	  	<div class="success"></div>
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#notas" data-toggle="tab" aria-expanded="true">Mis notas</a></li>
-			<li class=""><a href="#predicas" data-toggle="tab" aria-expanded="true">Otras prédicas de {{ $sermon->preacher->nombre }}</a></li>
+			@if(Auth::user())
+				<li class="active"><a href="#notas" data-toggle="tab" aria-expanded="true">Mis notas</a></li>
+			@endif
+			<li class="active"><a href="#predicas" data-toggle="tab" aria-expanded="true">Otras prédicas de {{ $sermon->preacher->nombre }}</a></li>
 			<li class=""><a href="#tags" data-toggle="tab" aria-expanded="true">Artículos relacionados</a></li>
 		</ul>
+		<!-- Notes, Preachers and Tags -->
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade active in" id="notas">
-				@include('admin.notes.create')
-				<hr>
-				<!--<ul class="list-group">
-					@foreach($notes as $item)
-					  	<li class="list-group-item" style="color:{{ $item->color }}">
-					    	<span class="badge">{{ $item->created_at->diffForHumans() }}</span>
-					    	{{ $item->contenido }}
-					    	<span class="pull-right"><button type="button" value="{{ $item->id }}" onclick="ShowNota(this);" class="pull-right btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button></span> 
-					  	</li>
-				  	@endforeach
-				</ul>-->
-				<ul class="list-group">
-					<div id="notes">
-						
-					</div>
-				</ul>
-			</div>
-			<div class="tab-pane fade" id="predicas">
+			@if(Auth::user())
+				<div class="tab-pane fade active in" id="notas">
+					@include('admin.notes.create')
+					<hr>
+					<!--<ul class="list-group">
+						@foreach($notes as $item)
+						  	<li class="list-group-item" style="color:{{ $item->color }}">
+						    	<span class="badge">{{ $item->created_at->diffForHumans() }}</span>
+						    	{{ $item->contenido }}
+						    	<span class="pull-right"><button type="button" value="{{ $item->id }}" onclick="ShowNota(this);" class="pull-right btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button></span> 
+						  	</li>
+					  	@endforeach
+					</ul>-->
+					<ul class="list-group">
+						<div id="notes">
+							
+						</div>
+					</ul>
+				</div>
+			@endif
+			<div class="tab-pane fade active in" id="predicas">
 				<p>Food truck fixie </p>
 			</div>
 			<div class="tab-pane fade" id="tags">
 				<p>Etsy mixtape wayfarers, ethical </p>
 			</div>
 		</div>
-		<!--<div>
-			<p class="lead">Comentarios</p>
-			<div id="comments">
+		<!-- Comment -->
+		
+			<div>
+				<p class="lead">Comentarios</p>
+				@if(Auth::user())
+					@include('admin.comments.create')
+				@endif
 				
+				<div id="comments">
+					
+				</div>				
 			</div>
-			@include('admin.comments.create')
-		</div>-->
+		
 	</div>
 	
 

@@ -15,7 +15,7 @@ class CommentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('editor');
+        $this->middleware('editor', ['except' => ['store']]);
     }
     /**
      * Display a listing of the resource.

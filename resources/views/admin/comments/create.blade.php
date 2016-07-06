@@ -1,6 +1,8 @@
 <div class="error"></div>
 {!! Form::open(['route' => 'comments.store', 'class' => 'add-comment']) !!}
+    
  	{!! Form::hidden('id_user', Auth::user()->id) !!}
+    
  	<input type="hidden" value="{{ $sermon->id }}" name="id_article">
 	{!! Form::label('nombre', 'Nombre') !!}
 	<div class="row">
