@@ -8,9 +8,16 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdsRequest;
 use App\Ad;
+use Carbon\Carbon;
 
 class AdsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('editor');
+        Carbon::setlocale('es');
+    }
     /**
      * Display a listing of the resource.
      *

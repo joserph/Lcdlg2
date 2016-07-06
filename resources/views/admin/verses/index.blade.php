@@ -33,10 +33,10 @@
                 <td class="text-center">{{ $item->libro }} </td>
                 <td class="text-center">{{ $item->capitulo }}</td>
                 <td class="text-center">{{ $item->versiculo }}</td>
-                <td class="text-center">{{ $item->texto }}</td>
+                <td class="text-center">{!! $item->texto !!}</td>
                 <td class="text-center">{{ $item->user->name }}</td>
                 <td class="text-center">
-                    <a href="{{ route('verses.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</a>
+                    <a href="{{ route('verses.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>
                 </td>
             </tr>          
             @endforeach            

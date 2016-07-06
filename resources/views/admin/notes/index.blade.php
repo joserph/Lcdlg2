@@ -28,7 +28,7 @@
                 <td class="text-center">{{ $item->contenido }} </td>
                 <td class="text-center">{{ $item->sermon->title }}</td>
                 <td class="text-center">{{ $item->user->name }} </td>
-                <td class="text-center" id="dateNote">{{ $item->created_at->format('d/m/Y') }}</td>
+                <td class="text-center">{{ $item->created_at->format('d/m/Y') }}</td>
             </tr>          
             @endforeach            
         </table>

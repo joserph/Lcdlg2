@@ -26,19 +26,24 @@
                 <th class="text-center">Contenido</th>
                 <th class="text-center">Fecha</th>
                 <th class="text-center">Hora</th>  
-                <th class="text-center">Usuario</th>  
+                <th class="text-center">Usuario</th> 
+                <th class="text-center">Publicado</th>   
                 <th class="text-center">Acción</th>              
             </tr>
             @foreach($ads as $item) 
             <tr>
                 <td class="text-center">{{ $item->nombre }} </td>
                 <td class="text-center">{{ $item->estatus }}</td>
-                <td class="text-center">{{ $item->contenido }}</td>
-                <td class="text-center">{{ $item->fecha }}</td>
+                <td class="text-center">{!! $item->contenido !!}</td>
+                <?php
+                
+                ?>
+                <td class="text-center">{{ date('d/m/Y', strtotime($item->fecha)) }}</td>
                 <td class="text-center">{{ $item->hora }}</td>
                 <td class="text-center">{{ $item->user->name }}</td>
+                <td class="text-center">{{ $item->created_at->format('d/m/Y') }}</td>
                 <td class="text-center">
-                    <a href="{{ route('ads.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</a>
+                    <a href="{{ route('ads.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>
                 </td>
             </tr>          
             @endforeach            

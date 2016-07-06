@@ -24,7 +24,7 @@
                 <th class="text-center">Título</th>                       
                 <!--<th class="text-center">Contenido</th>--> 
                 <th class="text-center">Usuario</th> 
-                <th class="text-center">Fecha</th>  
+                <th class="text-center">Publicado</th>  
                 <th class="text-center">Acción</th>              
             </tr>
             @foreach($articles as $item) 

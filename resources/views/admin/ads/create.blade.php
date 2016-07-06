@@ -3,8 +3,8 @@
 @section('title') Agregar anuncio | Panel de administración @endsection
 
 @section('stylesheet')
-    <!-- Plugin trumbowyg -->
-    <link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">
+    <!-- Plugin Froala Wysiwyg Editor -->
+    <link rel="stylesheet" href="{{ asset('plugins/froala/css/froala_editor.min.css') }}">
 @endsection
 
 @section('content')
@@ -74,10 +74,12 @@
         {!! Form::close() !!}
     </ol>
     @section('scripts')
-        <!-- Trumbowyg JavaScript -->
-        <script src="{{ asset('plugins/trumbowyg/trumbowyg.js') }}"></script>
+        <!-- Plugin Froala Wysiwyg Editor -->
+        <script src="{{ asset('plugins/froala/js/froala_editor.min.js') }}"></script>
         <script>
-            $('.content').trumbowyg();
+            $(function() {
+                $('.content').editable({inlineMode: false});
+            });           
         </script>
     @endsection
 @endsection

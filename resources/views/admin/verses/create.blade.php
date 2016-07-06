@@ -5,8 +5,8 @@
 @section('stylesheet')
     <!-- Plugin Chosen -->
     <link rel="stylesheet" href="{{ asset('plugins/chosen/chosen.css') }}">
-    <!-- Plugin trumbowyg -->
-    <link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">
+    <!-- Plugin Froala Wysiwyg Editor -->
+    <link rel="stylesheet" href="{{ asset('plugins/froala/css/froala_editor.min.css') }}">
 @endsection
 <script>
     
@@ -138,11 +138,13 @@
     @section('scripts')
         <!-- Chosen JavaScript -->
         <script src="{{ asset('plugins/chosen/chosen.jquery.js') }}"></script>
-        <!-- Trumbowyg JavaScript -->
-        <script src="{{ asset('plugins/trumbowyg/trumbowyg.js') }}"></script>
+        <!-- Plugin Froala Wysiwyg Editor -->
+        <script src="{{ asset('plugins/froala/js/froala_editor.min.js') }}"></script>
         <script>
-            $('.texto').trumbowyg();
-            $('.libro').chosen();
+            $(function() {
+                $('.texto').editable({inlineMode: false});
+            });    
+            $('.libro').chosen();       
         </script>
     @endsection
 @endsection

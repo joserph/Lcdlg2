@@ -5,8 +5,8 @@
 @section('stylesheet')
     <!-- Plugin Chosen -->
     <link rel="stylesheet" href="{{ asset('plugins/chosen/chosen.css') }}">
-    <!-- Plugin trumbowyg -->
-    <link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">
+    <!-- Plugin Froala Wysiwyg Editor -->
+    <link rel="stylesheet" href="{{ asset('plugins/froala/css/froala_editor.min.css') }}">
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-                <i class="fa fa-plus-circle fa-fw"></i> Editar verso
+                <i class="fa fa-pencil-square fa-fw"></i> Editar verso
                 {!! Form::model($verse, ['route' => ['verses.destroy', $verse->id], 'method' => 'DELETE', 'role' => 'form', 'class' => 'pull-right']) !!}        
                     {!! Form::button('<i class="fa fa-trash fa-fw"></i> ' . 'Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar versículo?")']) !!}
                 {!! Form::close() !!}
@@ -140,11 +140,13 @@
     @section('scripts')
         <!-- Chosen JavaScript -->
         <script src="{{ asset('plugins/chosen/chosen.jquery.js') }}"></script>
-        <!-- Trumbowyg JavaScript -->
-        <script src="{{ asset('plugins/trumbowyg/trumbowyg.js') }}"></script>
+        <!-- Plugin Froala Wysiwyg Editor -->
+        <script src="{{ asset('plugins/froala/js/froala_editor.min.js') }}"></script>
         <script>
-            $('.texto').trumbowyg();
-            $('.libro').chosen();
+            $(function() {
+                $('.texto').editable({inlineMode: false});
+            });    
+            $('.libro').chosen();       
         </script>
     @endsection
 @endsection

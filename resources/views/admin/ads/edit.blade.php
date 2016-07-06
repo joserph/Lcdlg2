@@ -3,8 +3,8 @@
 @section('title') Editar anuncio | Panel de administración @endsection
 
 @section('stylesheet')
-    <!-- Plugin trumbowyg -->
-    <link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.css') }}">
+    <!-- Plugin Froala Wysiwyg Editor -->
+    <link rel="stylesheet" href="{{ asset('plugins/froala/css/froala_editor.min.css') }}">
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-                <i class="fa fa-plus-circle fa-fw"></i> Editar anuncio
+                <i class="fa fa-pencil-square fa-fw"></i> Editar anuncio
                 {!! Form::model($ad, ['route' => ['ads.destroy', $ad->id], 'method' => 'DELETE', 'role' => 'form', 'class' => 'pull-right']) !!}        
                     {!! Form::button('<i class="fa fa-trash fa-fw"></i> ' . 'Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar anuncio?")']) !!}
                 {!! Form::close() !!}                
@@ -78,10 +78,12 @@
         {!! Form::close() !!}
     </ol>
     @section('scripts')
-        <!-- Trumbowyg JavaScript -->
-        <script src="{{ asset('plugins/trumbowyg/trumbowyg.js') }}"></script>
+        <!-- Plugin Froala Wysiwyg Editor -->
+        <script src="{{ asset('plugins/froala/js/froala_editor.min.js') }}"></script>
         <script>
-            $('.content').trumbowyg();
+            $(function() {
+                $('.content').editable({inlineMode: false});
+            });           
         </script>
     @endsection
 @endsection
