@@ -52,6 +52,7 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
+        date_default_timezone_set('America/Caracas');
         $article = new Article($request->all());
         $article->save();
 

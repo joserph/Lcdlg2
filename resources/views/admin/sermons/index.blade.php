@@ -25,7 +25,8 @@
                 <th class="text-center">Mes</th>         
                 <th class="text-center">Año</th> 
                 <th class="text-center">Predicador</th> 
-                <th class="text-center">Usuario</th>  
+                <th class="text-center">Usuario</th> 
+                <th class="text-center">Publicado</th>  
                 <th class="text-center">Acción</th>              
             </tr>
             @foreach($sermons as $item) 
@@ -35,6 +36,7 @@
                 <td class="text-center">{{ $item->year->fecha }}</td>
                 <td class="text-center">{{ $item->preacher->nombre }}</td>
                 <td class="text-center">{{ $item->user->name }}</td>
+                <td class="text-center">{{ $item->created_at->format('d/m/Y') }}</td>
                 <td class="text-center">
                     <a href="{{ URL::route('show-sermon', $item->slug) }}" class="btn btn-info btn-xs"><i class="fa fa-eye fa-fw"></i> Ver</a>
                     <a href="{{ route('sermons.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>

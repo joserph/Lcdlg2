@@ -42,7 +42,8 @@
                 
                 <th class="text-center">Fecha</th>
                 <!--<th class="text-center">Slug</th>-->
-                <th class="text-center">Tipo</th>                 
+                <th class="text-center">Tipo</th>
+                <th class="text-center">Publicado</th>               
                 <th class="text-center">Acción</th>                
             </tr>            
             
@@ -71,6 +72,8 @@
         </div>
     </div>
     @section('scripts')
-		<script src="{{ asset('js/myScripts.js') }}"></script>
+        <script src="{{ asset('js/myScripts.js') }}"></script>
+        <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>        
     @endsection
 @endsection

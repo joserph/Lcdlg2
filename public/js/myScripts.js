@@ -244,7 +244,9 @@ function ListFechas()
 	{
 		$(respuesta).each(function(key, value)
 		{
-			trDatos.append('<tr><td class="text-center">'+ value.fecha +'</td><td class="text-center">'+ value.tipo +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowFecha(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeleteFecha(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
+			var created_at = value.created_at;
+			var fechaFinal1 = moment(created_at).locale('es').format('L');
+			trDatos.append('<tr><td class="text-center">'+ value.fecha +'</td><td class="text-center">'+ value.tipo +'</td><td class="text-center">'+ fechaFinal1 +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowFecha(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeleteFecha(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
 		});
 	});	
 }
@@ -269,7 +271,9 @@ function ListPredicador()
 	{
 		$(respuesta).each(function(key, value)
 		{
-			trDatos.append('<tr><td class="text-center">'+ value.nombre +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowPredicador(this);" data-toggle="modal" data-target="#myModal3" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeletePredicador(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
+			var created_at = value.created_at;
+			var fechaFinal2 = moment(created_at).locale('es').format('L');
+			trDatos.append('<tr><td class="text-center">'+ value.nombre +'</td><td class="text-center">'+ fechaFinal2 +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowPredicador(this);" data-toggle="modal" data-target="#myModal3" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeletePredicador(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
 		});
 	});
 }
@@ -319,8 +323,6 @@ function ListNotes()
 			{
 				var fecha = value.created_at;
 				var fechaFinal = moment(fecha).locale('es').fromNow();
-				//trDatos.append('<div class="panel panel-default" style="color:'+ value.color +'"><div class="panel-body">'+ value.contenido +'</div><div class="panel-footer">' + value.created_at + '</div></div><hr>')
-				//trDatos.append('<span class="label label-default" style="color:'+ value.color +'">'+ value.contenido +' - ' + value.created_at + '</span><hr>')
 				trDatos.append('<li class="list-group-item" style="color:'+ value.color +'"><span class="badge">'+ fechaFinal +'</span>'+ value.contenido +'<span class="pull-right"><button type="button" value='+ value.id +' onclick="ShowNota(this);" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square fa-fw"></i></button> <button type="button" value='+ value.id +' onclick="DeleteNote(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i></button></span></li>')
 			}
 		});

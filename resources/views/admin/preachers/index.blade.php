@@ -41,6 +41,7 @@
             <tr>
                 
                 <th class="text-center">Nombre</th>
+                <th class="text-center">Publicado</th>
                 <!--<th class="text-center">Slug</th>-->   
                 <th class="text-center">Acción</th>                
             </tr>            
@@ -69,8 +70,9 @@
             </div>
         </div>
     </div>
-
 	@section('scripts')
-		<script src="{{ asset('js/myScripts.js') }}"></script>
-	@endsection
+        <script src="{{ asset('js/myScripts.js') }}"></script>
+        <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>        
+    @endsection
 @endsection

@@ -64,6 +64,7 @@ class SermonsController extends Controller
      */
     public function store(SermonRequest $request)
     {
+        date_default_timezone_set('America/Caracas');
         $sermon = new Sermon($request->all());
         $sermon->save();
 

@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-                <i class="fa fa-plus-circle fa-fw"></i> Editar menú
+                <i class="fa fa-pencil-square fa-fw"></i> Editar menú
                 {!! Form::model($menu, ['route' => ['menu.destroy', $menu->id], 'method' => 'DELETE', 'role' => 'form', 'class' => 'pull-right']) !!}        
                     {!! Form::button('<i class="fa fa-trash fa-fw"></i> ' . 'Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar menú?")']) !!}
                 {!! Form::close() !!}

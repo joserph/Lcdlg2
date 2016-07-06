@@ -104,17 +104,19 @@
                 @endif
                 <td class="text-center">{{ $item->peso}}</td>
                 <td class="text-center">{{ $item->tipo }} </td>
-                @foreach($padres as $padre)
-                    @if($padre->id == $item->id_padre)
-                        <td class="text-center">{{ $padre->nombre }}</td>
-                    @elseif($item->id_padre == 0)
-                        <td class="text-center"><em>Null</em></td>
-                    @endif
-                @endforeach
+                @if($item->id_padre == 0)
+                    <td class="text-center"><em>Null</em></td>
+                @else
+                    @foreach($padres as $padre)
+                        @if($padre->id == $item->id_padre)
+                            <td class="text-center">{{ $padre->nombre }}</td>
+                        @endif
+                    @endforeach
+                @endif
                 <td class="text-center">{{ $item->categoria }}</td>
                 <td class="text-center">{{ $item->user->name }} </td>
                 <td class="text-center">
-                    <a href="{{ route('menu.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit fa-fw"></i> Editar</a>
+                    <a href="{{ route('menu.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>
                 </td>
             </tr>          
             @endforeach            

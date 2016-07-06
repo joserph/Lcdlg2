@@ -21,18 +21,18 @@
     <div class="table-responsive">
         <table class="table table-striped table-hover table-responsive">
             <tr>                
-                <th class="text-center">Título</th>
-                <th class="text-center">Fecha</th>         
+                <th class="text-center">Título</th>                       
                 <!--<th class="text-center">Contenido</th>--> 
-                <th class="text-center">Usuario</th>  
+                <th class="text-center">Usuario</th> 
+                <th class="text-center">Fecha</th>  
                 <th class="text-center">Acción</th>              
             </tr>
             @foreach($articles as $item) 
             <tr>
-                <td class="text-center">{{ $item->title }} </td>
-                <td class="text-center">{{ $item->fecha }}</td>
+                <td class="text-center">{{ $item->title }} </td>                
                 <!--<td class="text-center">{{ $item->content }}</td>-->
                 <td class="text-center">{{ $item->user->name }}</td>
+                <td class="text-center">{{ $item->created_at->format('d/m/Y') }}</td>
                 <td class="text-center">
                     <a href="{{ route('articles.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</a>
                 </td>
