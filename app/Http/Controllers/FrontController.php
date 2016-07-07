@@ -11,6 +11,7 @@ use App\Ad;
 use App\Sermon;
 use Carbon\Carbon;
 use App\Note;
+use App\Preacher;
 
 class FrontController extends Controller
 {
@@ -44,13 +45,16 @@ class FrontController extends Controller
         $hijos = Menu::where('id_padre', '<>', '')->orderBy('peso', 'ASC')->get();//Menú
         $sermon = Sermon::with('month', 'year', 'preacher', 'user')->where('slug', '=', $slug)->first();
         $notes = Note::with('sermon', 'user')->where('id_sermon', '=', $sermon->id)->orderBy('id', 'DESC')->get();
+        $Sermons = Sermon::with('month', 'year', 'preacher', 'user')->where('id_preacher', '=', $sermon->id_preacher)->get();// Predicas del predicador($sermon->id_preacher).
+        $preacherSermons = $Sermons->random(2);// Random de las prédicas.
         
-        //dd($sermon);
+        //dd($random);
 
         return view('front.sermons.show')
             ->with('previewMenu', $previewMenu)
             ->with('hijos', $hijos)
             ->with('sermon', $sermon)
-            ->with('notes', $notes);
+            ->with('notes', $notes)
+            ->with('preacherSermons', $preacherSermons);
     }
 }

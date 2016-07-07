@@ -1,4 +1,4 @@
-<div class="error"></div>
+<div class="errorNote"></div>
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 <input type="hidden" id="id">
  {!! Form::label('contenido', 'Contenido de la nota') !!}

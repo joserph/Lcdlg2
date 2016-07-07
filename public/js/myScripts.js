@@ -193,8 +193,8 @@ $(document).ready(function()
 			data: formNote.serialize(),
 			success: function(data)
 			{
-				$('.error').html('');
-				$('.success').hide().html('');
+				$('.errorNote').html('');
+				$('.successNote').hide().html('');
 				if(data.success == false)
 				{
 					var errors = '';
@@ -206,7 +206,7 @@ $(document).ready(function()
 						errors += '<li>' + data.errors[datos] + '</li>'
 					}
 						errors += '</div>';
-					$('.error').html(errors);
+					$('.errorNote').html(errors);
 				}else{
 					var successMessage = '';
 						successMessage += '<div class="alert alert-success">';
@@ -216,12 +216,12 @@ $(document).ready(function()
 					$(formNote)[0].reset();
 					ListNotes();
 					//location.reload();
-					$('.success').show().html(successMessage);
+					$('.successNote').show().html(successMessage);
 				}
 			},
 			error: function()
 			{
-				$('.error').html(errors);
+				$('.errorNote').html(errors);
 			}
 		});
 		return false;
@@ -442,7 +442,7 @@ $('#edit-nota').click(function()
 				successMessage += '</div>';
 				ListNotes();
 				$('#myModal').modal('hide');
-				$('.success').show().html(successMessage);
+				$('.successNote').show().html(successMessage);
 			}
 		}
 	})
@@ -528,7 +528,7 @@ function DeleteNote(boton)
 				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
 				successMessage += '</div>';
 				ListNotes();
-				$('.success').show().html(successMessage);
+				$('.successNote').show().html(successMessage);
 			}
 		});
 	}

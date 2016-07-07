@@ -1,4 +1,4 @@
-<div class="error"></div>
+<div class="errorNote"></div>
 {!! Form::open(['route' => 'notes.store', 'class' => 'add-note']) !!}
  	{!! Form::hidden('id_user', Auth::user()->id) !!}
  	<input type="hidden" value="{{ $sermon->id }}" name="id_sermon">
