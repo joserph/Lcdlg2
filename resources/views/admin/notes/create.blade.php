@@ -10,7 +10,7 @@
     </div>
 	{!! Form::label('color', 'Selecciona un color de fuente') !!}
     <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-3">
             {!! Form::color('color', null, ['class' => 'form-control']) !!}
         </div>
     </div>    
