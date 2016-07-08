@@ -61,4 +61,9 @@ class Sermon extends Model implements SluggableInterface
     {
         return $this->hasMany('App\Note', 'id_sermon');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }

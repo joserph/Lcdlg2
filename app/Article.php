@@ -37,4 +37,9 @@ class Article extends Model
     {
         return $this->belongsTo('App\Preacher', 'id_preacher');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }
