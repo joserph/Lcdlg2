@@ -1,6 +1,6 @@
 @extends('admin.template.layout')
 
-@section('title') Fehcas | Panel de administración @endsection
+@section('title') Fechas | Panel de administración @endsection
 
 @section('content')
 	<!-- Page Heading -->
@@ -12,7 +12,7 @@
             </h2>
             <ol class="breadcrumb">
                 <li><i class="fa fa-bars fa-fw"></i> <a href="{{ route('admin.index') }}">Panel de administración</a></li>
-                <li class="active">Lista de fechas</li>
+                <li class="active">Lista de tags</li>
             </ol>
         </div>
     </div>    

@@ -228,6 +228,53 @@ $(document).ready(function()
 	});
 	ListNotes();
 	// End Notes
+
+	// Tags
+	var formTag = $('.add-tag');
+	formTag.on('submit', function()
+	{
+		$.ajax({
+			type: formTag.attr('method'),
+			url: formTag.attr('action'),
+			data: formTag.serialize(),
+			success: function(data)
+			{
+				$('.error').html('');
+				$('.successNote').hide().html('');
+				if(data.success == false)
+				{
+					var errors = '';
+						errors += '<div class="alert alert-warning">';
+						errors += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+						errors += '<h4><i class="fa fa-exclamation-triangle fa-fw"></i> Por favor corrige los siguentes errores:</h4>';
+					for(datos in data.errors)
+					{
+						errors += '<li>' + data.errors[datos] + '</li>'
+					}
+						errors += '</div>';
+					$('.error').html(errors);
+				}else{
+					var successMessage = '';
+						successMessage += '<div class="alert alert-success">';
+						successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+						successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+						successMessage += '</div>';
+					$(formTag)[0].reset();
+					ListTags();
+					//location.reload();
+					$('#myModal').modal('hide');
+					$('.successNote').show().html(successMessage);
+				}
+			},
+			error: function()
+			{
+				$('.error').html(errors);
+			}
+		});
+		return false;
+	});
+	ListTags();
+	// End Tags
 });
 
 
@@ -340,7 +387,30 @@ function ShowNota(boton)
 	})
 }
 // End Notes
-
+// Tags
+function ListTags()
+{
+	var trDatos = $('#tr-tag');
+	var route = 'http://lcdlg2.dev/tag';
+	$('#tr-tag').empty();
+	$.get(route, function(respuesta)
+	{
+		$(respuesta).each(function(key, value)
+		{		
+			trDatos.append('<tr><td class="text-center">'+ value.nombre +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowTag(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="ShowTagDelete(this);" data-toggle="modal" data-target="#myModal3" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
+		});
+	});
+}
+function ShowTag(boton)
+{
+	var route = 'http://lcdlg2.dev/tags/'+ boton.value +'/edit';
+	$.get(route, function(respuesta)
+	{
+		$('#nombreEdit').val(respuesta.nombre);
+		$('#id').val(respuesta.id);
+	});
+}
+// End Tags
 /*
  * ******************** EDIT. ********************
  */
@@ -448,7 +518,40 @@ $('#edit-nota').click(function()
 	})
 });
 // End notes
+// Tags
+$('#edit-tag').click(function()
+{
+	var id = $('#id').val();
+	var nombre = $('#nombreEdit').val();
+	var updateUser = $('#updateUser').val();
+	var route = 'http://lcdlg2.dev/tags/'+id+'';
+	var token = $('#token').val();
 
+	$.ajax({
+		url: route,
+		headers: {'X-CSRF-TOKEN': token},
+		type: 'PUT',
+		dataType: 'json',
+		data: {nombre: nombre, update_user: updateUser},
+		success: function(data)
+		{
+			if(data.success == false)
+			{
+				console.log("Error");
+			}else{
+				var successMessage = '';
+				successMessage += '<div class="alert alert-warning">';
+				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+				successMessage += '</div>';
+				ListTags();
+				$('#myModal2').modal('hide');
+				$('.success').show().html(successMessage);
+			}
+		}
+	})
+});
+// End Tags
 
 /*
  * ******************** DELETE. ********************
@@ -533,6 +636,44 @@ function DeleteNote(boton)
 		});
 	}
 }
-
-
 // End Notes
+// Tags
+function ShowTagDelete(boton)
+{
+	var route = 'http://lcdlg2.dev/tags/'+ boton.value +'/edit';
+	$.get(route, function(respuesta)
+	{
+		$('#nombreDelete').val(respuesta.nombre);
+		$('#id').val(respuesta.id);
+	});
+}
+$('#delete-tag').click(function()
+{
+	var id = $('#id').val();	
+	var route = 'http://lcdlg2.dev/tags/'+id+'';
+	var token = $('#token').val();
+
+	$.ajax({
+		url: route,
+		headers: {'X-CSRF-TOKEN': token},
+		type: 'DELETE',
+		dataType: 'json',
+		success: function(data)
+		{
+			if(data.success == false)
+			{
+				console.log("Error");
+			}else{
+				var successMessage = '';
+				successMessage += '<div class="alert alert-danger">';
+				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
+				successMessage += '</div>';
+				ListTags();
+				$('#myModal3').modal('hide');
+				$('.success').show().html(successMessage);
+			}
+		}
+	})
+});
+// End Tags

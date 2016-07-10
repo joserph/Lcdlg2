@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Tag;
+use Validator;
 
 class TagsController extends Controller
 {
@@ -17,6 +19,15 @@ class TagsController extends Controller
     public function index()
     {
         return view('admin.tags.index');
+    }
+
+    public function getList()
+    {
+        $tags = Tag::orderBy('id', 'DESC')->get();
+        //dd($tags);
+        return response()->json(
+            $tags->toArray()
+        );
     }
 
     /**
@@ -37,7 +48,35 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('America/Caracas');
+        if(\Request::ajax())
+        {
+            //Validamos 
+            $validator = Validator::make($request->all(), [
+                'nombre' => 'required|unique:tags'
+            ]);
+            //Validamos si falla
+            if($validator->fails())
+            {
+                return response()->json([
+                    'success'   => false,
+                    'errors'    => $validator->getMessageBag()->toArray()
+                ]);
+            }else{
+                //Si todo va bién
+                $tag = new Tag($request->all());
+                $tag->save();
+                //Si lo guarda
+                if($tag)
+                {
+                    return response()->json([
+                        'success'   => true,
+                        'message'   => 'El tag <b>' . $tag->nombre . '</b> se agregó con exito!',
+                        'tag'       => $tag->toArray()
+                    ]);
+                }
+            }   
+        }
     }
 
     /**
@@ -59,7 +98,10 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return response()->json(
+            $tag->toArray()
+        );
     }
 
     /**
@@ -71,7 +113,14 @@ class TagsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->fill($request->all());
+        $tag->save();
+
+        return response()->json([
+            'success'   => true,
+            'message'   => 'El tag <b>' . $tag->nombre . '</b> se actualizó con exito!'
+        ]);
     }
 
     /**
@@ -82,6 +131,12 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->delete();
+
+        return response()->json([
+            'success'   => true,
+            'message'   => 'El tag <b>' . $tag->nombre . '</b> se eliminó con exito!'
+        ]);
     }
 }

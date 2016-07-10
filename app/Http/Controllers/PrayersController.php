@@ -51,7 +51,7 @@ class PrayersController extends Controller
         if(\Request::ajax())
         {
             $validator = Validator::make($request->all(), [
-                'nombre'    => 'required',
+                'nombre'    => 'required|unique:prayers',
                 'email'     => 'required|email',
                 'peticion'  => 'required'
             ]);

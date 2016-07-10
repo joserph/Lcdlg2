@@ -88,6 +88,7 @@ Route::resource('notes', 'NotesController');
 Route::get('note', 'NotesController@getList');
 // Tags
 Route::resource('tags', 'TagsController');
+Route::get('tag', 'TagsController@getList');
 
 
 // Show Sermon (Ultimo)
