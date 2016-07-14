@@ -71,6 +71,25 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Delete-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-trash fa-fw"></i> Eliminar fecha</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    @include('admin.dates.delete')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @section('scripts')
         <script src="{{ asset('js/myScripts.js') }}"></script>
         <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>

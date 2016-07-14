@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-                <i class="fa fa-calendar fa-fw"></i> Tags 
+                <i class="fa fa-tags fa-fw"></i> Tags 
                 <button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle fa-fw"></i> Agregar</button>
             </h2>
             <ol class="breadcrumb">

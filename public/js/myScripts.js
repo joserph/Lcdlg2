@@ -263,7 +263,7 @@ $(document).ready(function()
 					ListTags();
 					//location.reload();
 					$('#myModal').modal('hide');
-					$('.successNote').show().html(successMessage);
+					$('.success').show().html(successMessage);
 				}
 			},
 			error: function()
@@ -293,7 +293,7 @@ function ListFechas()
 		{
 			var created_at = value.created_at;
 			var fechaFinal1 = moment(created_at).locale('es').format('L');
-			trDatos.append('<tr><td class="text-center">'+ value.fecha +'</td><td class="text-center">'+ value.tipo +'</td><td class="text-center">'+ fechaFinal1 +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowFecha(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="DeleteFecha(this);" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
+			trDatos.append('<tr><td class="text-center">'+ value.fecha +'</td><td class="text-center">'+ value.tipo +'</td><td class="text-center">'+ fechaFinal1 +'</td><td class="text-center"><button value='+ value.id +' onclick="ShowFecha(this);" data-toggle="modal" data-target="#myModal2" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square fa-fw"></i> Editar</button> <button value='+ value.id +' onclick="ShowDateDelete(this);" data-toggle="modal" data-target="#myModal3" class="btn btn-danger btn-xs"><i class="fa fa-trash fa-fw"></i> Eliminar</button></td></tr>')
 		});
 	});	
 }
@@ -349,7 +349,7 @@ function ListComments()
 		{
 			if(idSermon == value.id_article)
 			{
-				trDatos.append('<p class="text-capitalize" style="color:'+ value.color +'"><strong><em>'+ value.nombre +'</em></strong> - '+ value.date +'</p><p class="text-capitalize text-justify">'+ value.comentario +'</p><hr>');
+				trDatos.append('<p class="text-capitalize" style="color:'+ value.color +'"><strong><em>'+ value.nombre +'</em></strong> - '+ value.date +'</p><p class="text-justify">'+ value.comentario +'</p><hr>');
 			}			
 		});
 	});
@@ -557,31 +557,44 @@ $('#edit-tag').click(function()
  * ******************** DELETE. ********************
  */
  // Fechas
-function DeleteFecha(boton)
+function ShowDateDelete(boton)
 {
-	var route = 'http://lcdlg2.dev/dates/'+boton.value+'';
-	var token = $("#token").val();
-	var action = confirm("¿Seguro de eliminar fecha?");
-	if(action)
+	var route = 'http://lcdlg2.dev/dates/'+ boton.value +'/edit';
+	$.get(route, function(respuesta)
 	{
-		$.ajax({
-			url: route,
-			headers: {'X-CSRF-TOKEN': token},
-			type: 'DELETE',
-			dataType: 'json',
-			success: function(data)
+		$('#fechaDelete').val(respuesta.fecha);
+		$('#id').val(respuesta.id);
+	});
+}
+$('#delete-fecha').click(function()
+{
+	var id = $('#id').val();	
+	var route = 'http://lcdlg2.dev/dates/'+id+'';
+	var token = $('#token').val(); 
+
+	$.ajax({
+		url: route,
+		headers: {'X-CSRF-TOKEN': token},
+		type: 'DELETE',
+		dataType: 'json',
+		success: function(data)
+		{
+			if(data.success == false)
 			{
+				console.log("Error");
+			}else{
 				var successMessage = '';
 				successMessage += '<div class="alert alert-danger">';
 				successMessage += '<button type="button" class="close" data-dismiss="alert">&times;</button>';
 				successMessage += '<p><i class="fa fa-check fa-fw"></i>' + data.message + '</p>';
 				successMessage += '</div>';
 				ListFechas();
-				$('.success').show().html(successMessage);	
+				$('#myModal3').modal('hide');
+				$('.success').show().html(successMessage);
 			}
-		});
-	}	
-}
+		}
+	});
+});	
 // End Fechas
 // Predicadores
 function DeletePredicador(boton)
@@ -674,6 +687,7 @@ $('#delete-tag').click(function()
 				$('.success').show().html(successMessage);
 			}
 		}
-	})
+	});
 });
 // End Tags
+

@@ -30,7 +30,7 @@ class DatesController extends Controller
 
     public function getList()
     {
-        $dates = Date::orderBy('id', 'DESC')->get();
+        $dates = Date::select('id', 'fecha', 'tipo')->orderBy('id', 'DESC')->get();
         return response()->json(
             $dates->toArray()
         );

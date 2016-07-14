@@ -104,6 +104,9 @@
                             <li>
                                 <a href="{{ route('notes.index') }}"><i class="fa fa-fw fa-sticky-note"></i> Notas</a>
                             </li>
+                            <li>
+                                <a href="{{ route('tags.index') }}"><i class="fa fa-fw fa-tags"></i> Tags</a>
+                            </li>
                         </ul>
                     </div>
             <!-- /.sidebar-collapse -->

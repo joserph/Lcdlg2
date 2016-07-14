@@ -1,5 +1,4 @@
 <div class="error"></div>
-<div class="success"></div>
 {!! Form::open(['route' => 'tags.store', 'class' => 'add-tag']) !!}
 	{!! Form::label('nombre', 'Nombre') !!}
 	<div class="row">
